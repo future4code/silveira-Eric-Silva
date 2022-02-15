@@ -28,12 +28,10 @@ let a = 25
 let b = 10
 let c = 0
 
-c = a
+a = c
 b = a 
 c = b
 
 console.log(a) 
 console.log(b)
 console.log(c)
-
-
