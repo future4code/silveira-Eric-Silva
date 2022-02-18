@@ -15,14 +15,21 @@ console.log(fraseConcat)*/
 a) Imprima no console o array completo
 b) Imprima no console a mensagem "Essas são as minhas comidas preferidas: ", seguida por cada uma das comidas, **uma embaixo da outra**.
 c) Aqui vai um desafio: pergunte ao usuário uma comida preferida. Troque a segunda comida da sua lista pela inserida pelo usuário. Imprima no console a nova lista.*/
-/*const comidasPreferidas=['Hamburger', 'Pizza', 'Pastel', 'Feijoada','Churrasco']
+
+/*
+const comidasPreferidas=['Hamburger', 'Pizza', 'Pastel', 'Feijoada','Churrasco']
+
 
 //console.log("Essas são as minhas comidas preferidas:")
 //console.log(comidasFavoritas,length)
  
 const qualSuaComidaPreferida = prompt("Qual a sua comida preferida?")
 
+
 console.log(comidasPreferidas.splice(2,1))/*
+
+console.log(comidasPreferidas.splice(2,1))
+
 
 /*a) Crie um array vazio e guarde-o em uma variável, chamada `listaDeTarefas`
 b) Pergunte ao usuário 3 tarefas que ele precise realizar no dia e armazene-as, uma por uma, no array
@@ -31,6 +38,7 @@ d) Peça ao usuário que digite o **índice** de uma tarefa que ele já realizou
 e) Remova da lista o item de índice que o usuário escolheu.
 f) Imprima o array no consol*/
 
+
 const listaDeTarefas = ["estudar", "comer", "dormir"]
 listaDeTarefas.splice(0, 2)
 
@@ -38,13 +46,6 @@ const tresTarefas = prompt("Fale três tarefas que você precise realizar hoje")
 tresTarefas.push(3)
 
 console.log(listaDeTarefas)
-
-
-
-
-
-
-
 
 
 
@@ -58,6 +59,7 @@ const li = prompt("Diga 3 tarefas que você tem que realizar hoje?")
 function minhaFuncao(variavel) {return variavel * 5}
 console.log(minhaFuncao(2))
 console.log(minhaFuncao(10))*/
+
 
 
 
