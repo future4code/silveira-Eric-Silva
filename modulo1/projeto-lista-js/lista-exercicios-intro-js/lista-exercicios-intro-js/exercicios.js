@@ -1,7 +1,7 @@
 // EXEMPLOS DE IMPLEMENTAÇÃO ---------------------------------------------------------------
 
 // EXERCÍCIO 0A
-function soma(num1, num2) {
+/*function soma(num1, num2) {
   // implemente sua lógica aqui
   return num1 + num2
 }
@@ -112,13 +112,20 @@ function checaIgualdadeDesconsiderandoCase(string1, string2) {
   return string1.toLowerCase() === string2.toLowerCase() 
   
 }
-
+*/
 // EXERCÍCIO 13
 function checaRenovacaoRG() {
   // implemente sua lógica aqui
+const anoAtual = prompt("Em que ano estamos?")
+const anoDeNascimento = prompt("Quando você nasceu?")
+const Identidade = prompt("Quando sua identidade foi emitida?")
+const idade = anoAtual - anoDeNascimento
+const renovacao = Identidade <=5
 
+console.log(idade)
+console.log(renovacao)
 }
-
+checaRenovacaoRG
 // EXERCÍCIO 14
 function checaAnoBissexto(ano) {
   // implemente sua lógica aqui
