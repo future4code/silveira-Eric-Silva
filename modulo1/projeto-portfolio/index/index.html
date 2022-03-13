@@ -5,29 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Site de Portfólio Pessoal</title>
+    <title>Portfólio</title>
 </head>
 <body>
-    <div class="hero">
-        <nav>
-            <img src="../img/coding.png" class="logo">
-            <ul>
-                <li><a href="#">INICIO</a></li>
-                <li><a href="#">SOBRE</a></li>
-                <li><a href="#">INICIO</a></li>
-                <li><a href="#">TRABALHO</a></li>
-                <li><a href="#">CONTRATE-ME</a></li>
-            </ul>
-        </nav>
-        <div class="detalhe">
-        <h1>Eu me chamo <span>Eric Felipe</span> </h1>
-        <p>Este é o meu website oficial para mostrar todos
-            <br>detalhes e trabalhos de desenvolvimento web que eu conclui
-    </p>
-    <a href="#">DOWLOAD CV</a>
-    
+   <header class="container-header">
+    <div class="header">
+        <div class="checkbox-container">
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="toggle">
+                <label class="checkbox" for="toggle">
+                    <div class="trace"></div>
+                    <div class="trace"></div>
+                    <div class="trace"></div>                 
+                </label>
+                <div class="menu"></div>
+                <nav class="menu-itens">
+                    <ul>
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">Sobre</a>
+                        </li>
+                       <li>
+                           <a href="#">Projetos</a>
+                       </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
+    <h1>Eric Felipe</h1>
+    <h2>Full Stacks Developer</h2>
+    <div class="social-media">
+        <a href="https://www.linkedin.com/in/eric-felipe-silva-e-silva-61372b234/">Linkedin</a>
+        <a href="https://github.com/efss7">Github</a>
+       
     </div>
 
+   </header>
+   <main class="container">
+    <div class="card-container">
+        <div class="card">
+            <div class="card-wrapper">
+                <h2>blackjack</h2>
+                <p>Confira!</p>
+            </div>
+        </div>
+        <div class="card-text"> Blackjack feito inteirmanente utilizando JavaScript, nele é possível jogar contra o própio computador.
+             As regras são as mesmas do jogo original, a diferença é que você não precisa jogar com uma pessoa física.
+              Confira e se divirta! haha :)
+        </div>
+        <div class="card-container2">
+            <div class="card2">
+                <div class="card-wrapper2">
+                    <h2>Mercado</h2>
+                    <p>Confira!</p>
+                </div>
+            </div>
+            <div class="card-text2"> Esboço de um sistema de mercado feito utilizando HTML5 e CSS3,
+                 que pode ser ultilizado para fazer diversos tipos de sistemas diferentes, esse é
+                  focado em venda de produtos por exemplo, é possível ver os itens a venda, quantidade
+                   disponível e o valor de cada item numa tabela, além disso você ainda pode adicionar
+                    os itens em um carrinho.     
+            </div>
+    </div>
+   </main>
+   <footer class="container-footer">
+            Feito por Eric Felipe, 12/03/2022
+
+   </footer>
 </body>
 </html>
