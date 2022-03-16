@@ -1,0 +1,1 @@
+ˋˋˋreturn animais.filter(a=>a.status:)

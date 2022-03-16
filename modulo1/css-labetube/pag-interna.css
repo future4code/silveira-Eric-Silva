@@ -37,3 +37,12 @@ footer{
     align-items: center;
     background-color: orangered;
 }
+@media screen and (max-device-width : 480px) {
+    .conteudo{
+        grid-template-columns: 1fr;
+    }
+    .container-video{
+        height: 200px;
+    }
+     /* celulares */
+     }
