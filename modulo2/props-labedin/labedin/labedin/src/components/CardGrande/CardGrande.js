@@ -1,5 +1,5 @@
 import React from 'react';
-import styledComponents from 'styled-components';
+import styled from 'styled-components';
 
 const ComponentesEstilizados = styled.div`
     display: flex;
@@ -22,8 +22,6 @@ const imagem = styled.img`
 const descricao = styled.div`
  margin-bottom: 15px;
 `
-
-
 
 const nome = styled.h4`
     display: flex;

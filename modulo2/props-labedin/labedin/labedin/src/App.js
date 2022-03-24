@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import CardGrande from './components/CardGrande/CardGrande';
-import ImagemButton from './components/ImagemButton/ImagemButton';
-import CardPequeno from './components/CardPequeno/CarPequeno';
+import CardGrande from './components/CardGrande/CardGrande.js';
+import ImagemButton from './components/ImagemButton/ImagemButton.js';
+import CardPequeno from './components/CardPequeno/CarPequeno.js';
 import Perfil from './img/perfil.jpg'
 
 
