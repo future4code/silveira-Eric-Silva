@@ -1,15 +1,18 @@
+import Input from "../input";
+
 const Etapa1 = () => {
     return(
         <>
         <h1>ETAPA 1 - DADOS GERAIS</h1>
-        <p>1.Qual seu nome?</p>
-        <input/>
-        <p>2.Qual sua idade?</p>
-        <input/>
-        <p>3.Qual seu email?</p>
-        <input/>
-        <p>4.Qual sua escolaridade?</p>
+        <Input texto="1. Qual seu nome?"/>
+        <Input texto="2. Qual sua idade?"/>
+        <Input texto="3. Qual seu email?"/>
+        <p>Qual sua escolaridade?</p>
+        <select>
+        <option value="Ensino médio completo">Ensino médio completo</option>
+        <option value="Ensino médio incompleto">Ensino médio incompleto</option>
         
+        </select>
         </>
     )
 }
