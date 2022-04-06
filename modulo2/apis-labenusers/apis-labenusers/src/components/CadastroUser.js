@@ -1,47 +1,54 @@
-import React from "react";
-import styled from "styled-components"
 import axios from "axios";
+import React from "react";
 
-
-const  ContainerCadastro = styled.div`
-background-color: pink;
-
-`
-const headers = {
-    headers: {
-      Authorization: "eric-silva-silveira"
-    }
-  };
-  const urlCriateUser = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"  
 
 export default class CadastroUser extends React.Component {
-    state={
-        inputNome:"",
-        inputEmail:""
+    state = {
+        nome: "",
+        email: ""
     }
-    criarUser= () =>{
+    handleNome = (event) => {
+        this.setState({ nome: event.target.value })
+    }
+    handleEmail = (event) => {
+        this.setState({ email: event.target.value })
+    }
+    fazerCadastro = () =>{
+        const url = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"
         const body = {
-                "nome":this.state.inputNome,
-                "email":this.state.inputEmail
+            name: this.state.nome,
+            email: this.state.email
         }
+        axios.post(url, body,{
+          headers: {
+              Authorization:"eric-silva-silveira"
+          }
+        }).then((res) =>{
+            alert("Usuário(a) cadastrado(a) com sucesso!")
+            this.setState({nome:"", email:""})
+        })
+        .catch((err) =>{
+            alert(err.response.data.message)
+        })
     }
     render() {
-        return(
+        return (
             <div>
-                <button>Trocar de tela</button>
-                <input
-                placeholder="Nome:"
-                onChange={this.onChange.n}
+                <button onClick={this.props.irParaLista}>Ir para a lista de Usuários</button>
+                <h2>Cadastro</h2>
+                <input placeholder={"Nome"}
+                        value={this.state.nome}
+                        onChange={this.handleNome}
+
                 />
-                <input
-                id="email"
-                placeholder="E-mail:"
+                <input placeholder="E-mail"
+                         value={this.state.email}
+                         onChange={this.handleEmail}
                 />
-                <button>Criar Usuário</button>
+                <button onClick={this.fazerCadastro} >Cadastrar</button>
             </div>
-            
-            
         )
     }
+
 }
 
