@@ -14,11 +14,7 @@ export default class App extends React.Component {
         return <CriarPlaylist irParaLista={this.irParaLista} />
       case "lista":
         return <ListaDePlaylists irParaCriarPlaylist={this.irParaCriarPlaylist} />
-      case "detalhes":
-      //   return <DetalhesDaPlaylist irParaDetalhesDaPlaylist={this.irParaDetalhesDaPlaylist} />
-      // case "addmusica":
-      //   return <AddMusica irParaAddMusica={this.irParaAddMusica} />
-      // default:
+      default:
         return <div>Erro! Página não encontrada :( </div>
     }
   }
