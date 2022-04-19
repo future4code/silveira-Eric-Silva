@@ -9,8 +9,16 @@ const ListaPlaylistContainer = styled.div`
 
 class ListaPlaylistPage extends React.Component {
     state={
-        paginaAtual:"playlists"
+        paginaAtual:"playlists",
+        playlistId: ""
     };
+
+    mudarPagina = (paginaAtual, playlistId) => {
+        this.setState({
+            paginaAtual: paginaAtual,
+            playlistId: playlistId
+        })
+    }
     mudarPagina = (paginaAtual) => {
         this.setState({paginaAtual: paginaAtual})
       }
@@ -24,6 +32,7 @@ class ListaPlaylistPage extends React.Component {
             }else if (this.state.paginaAtual === "detalheDaPlaylist") {
                 return <DetalheDaPlaylist
                 mudarPagina={this.mudarPagina}
+                playlistId={this.state.playlistId}
                 />
                 
             }

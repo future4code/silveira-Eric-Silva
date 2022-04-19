@@ -17,9 +17,9 @@ const DeleteContainer = styled.p`
 const PlaylistCard = (props) => {
     return (
         <PlaylistCardContainer>
-            <button onClick={() => props.mudarPagina("detalheDaPlaylist")} >Abrir Playlist</button>
+            <button onClick={() => props.mudarPagina("detalheDaPlaylist", props.playlistId )} >Abrir Playlist</button>
             <NameContainer>{props.name}</NameContainer>
-            <DeleteContainer>X</DeleteContainer>
+            <DeleteContainer onClick={() => props.deletePlaylist(props.playlistId)} >X</DeleteContainer>
         </PlaylistCardContainer>
     )
 }

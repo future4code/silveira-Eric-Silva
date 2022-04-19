@@ -1,18 +1,96 @@
+// import React from "react";
+// import styled from "styled-components";
+// import TrackCard from "../TrackCard";
+// import axios from "axios";
+// import { axiosConfig, baseUrl } from "../../constants";
+
+// const DetalheDaPlaylistContainer = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+// `
+// const AddMusicaForm = styled.form`
+//     width: 100vh;
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-around;
+//     div{
+//         display: flex;
+//         flex-direction: column;
+//     }
+// `
+
+// class DetalheDaPlaylist extends React.Component {
+//     state = {
+//         tracks:[]
+//     };
+
+//     componentDidMount = () =>{
+//         this.fetchTracks()
+//     };
+
+//     fetchTracks = () =>{ 
+//         axios.get(`${baseUrl}/${this.props.playlistId}/tracks`, axiosConfig).then(response =>{
+//             this.setState({tracks: response.data.result.tracks})
+//         }).catch(err =>{
+//             console.log(err)
+//         });
+//     };
+//     render() {
+//         const tracks = this.state.tracks.map(track => {
+//             return <TrackCard
+//                 key={track.id}
+//                 trackName={track.name}
+//                 artist={track.artist}
+//                 url={track.url}
+//             />
+//         })
+//         return (
+//             <DetalheDaPlaylistContainer>
+//                 <AddMusicaForm>
+//                     <div>
+//                         <label>Nome da música</label>
+//                         <input />
+//                     </div>
+//                     <div>
+//                         <label>Artista</label>
+//                         <input />
+//                     </div>
+//                     <div>
+//                         <label>Url da música</label>
+//                         <input />
+//                     </div>
+//                     <button type="submit">Adicionar música</button>
+//                 </AddMusicaForm>
+//                 {tracks}
+//                 <button onClick={() => this.props.mudarPagina("playlists","")}>Voltar para Playlists</button>
+//             </DetalheDaPlaylistContainer>
+//         )
+//     };
+
+// };
+
+// export default DetalheDaPlaylist
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 import TrackCard from "../TrackCard";
+import { baseUrl, axiosConfig } from "../../constants";
 
 const DetalheDaPlaylistContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
 `
+
 const AddMusicaForm = styled.form`
-    width: 100vh;
+    width: 100vw;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    div{
+
+    div {
         display: flex;
         flex-direction: column;
     }
@@ -20,53 +98,109 @@ const AddMusicaForm = styled.form`
 
 class DetalheDaPlaylist extends React.Component {
     state = {
-        tracks: [
-            {
-                "id": "841ce23c-79fb-4ee3-98c5-3de2ac3c0182",
-                "name": "Sonho das Esquinas",
-                "artist": "BK, Filipe Ret",
-                "url": "https://open.spotify.com/track/4GvOLMwaQBdFyK9UyJNJok?si=3243dac3315741d8"
-            },
-            {
-                "id": "b708e2ba-9425-4b82-bd30-a05cb5bace1f",
-                "name": "Vida Loka, Pt.1",
-                "artist": "Racionais",
-                "url": "https://open.spotify.com/track/6m8AgjfI28ER6odzMxmHtR?si=c3b2852e828f48ed"
-            }
-        ]
-    }
-    render() {
+        tracks: [],
+        trackName: "",
+        artist: "",
+        url: ""
+    };
+
+    componentDidMount = () => {
+        this.fetchTracks()
+    };
+
+    fetchTracks = () => {
+        axios.get(`${baseUrl}/${this.props.playlistId}/tracks`, axiosConfig).then(response => {
+            this.setState({tracks: response.data.result.tracks})
+        }).catch(err => {
+            console.log(err)
+        });
+    };
+
+    removeTrackFromPlaylist = (trackId) => {
+        axios.delete(`${baseUrl}/${this.props.playlistId}/tracks/${trackId}`, axiosConfig).then(() => {
+            this.fetchTracks();
+        }).catch(err => {
+            console.log(err);
+        });
+    };
+
+    changeInputValues = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    };
+
+    addTrackToPlaylist = (e) => {
+        e.preventDefault()
+        const body = {
+            name: this.state.trackName,
+            artist: this.state.artist,
+            url: this.state.url
+        };
+
+        axios.post(`${baseUrl}/${this.props.playlistId}/tracks`,
+            body,
+            axiosConfig
+        ).then(() => {
+            this.fetchTracks();
+        }).catch(err => {
+            console.log(err);
+        });
+
+        this.setState({
+            trackName: "",
+            artist: "",
+            url: ""
+        })
+    };
+
+    render () {
         const tracks = this.state.tracks.map(track => {
-            return <TrackCard
+            return <TrackCard 
                 key={track.id}
                 trackName={track.name}
                 artist={track.artist}
                 url={track.url}
+                trackId={track.id}
+                removeTrackFromPlaylist={this.removeTrackFromPlaylist}
             />
         })
+
         return (
             <DetalheDaPlaylistContainer>
-                <AddMusicaForm>
+                <AddMusicaForm onSubmit={this.addTrackToPlaylist} >
                     <div>
-                        <label>Nome da música</label>
-                        <input />
+                        <label>Nome da música:</label>
+                        <input 
+                            placeholder="Nome da música"
+                            name="trackName"
+                            value={this.state.trackName}
+                            onChange={this.changeInputValues}
+                        />
                     </div>
                     <div>
-                        <label>Artista</label>
-                        <input />
+                        <label>Artista:</label>
+                        <input 
+                            placeholder="Nome do Artista"
+                            name="artist"
+                            value={this.state.artist}
+                            onChange={this.changeInputValues}
+                        />
                     </div>
                     <div>
-                        <label>Url da música</label>
-                        <input />
+                        <label>URL da música:</label>
+                        <input 
+                            placeholder="URL da música"
+                            name="url"
+                            value={this.state.url}
+                            onChange={this.changeInputValues}
+                        />
                     </div>
-                    <button type="submit">Adicionar música</button>
+                    <button type="submit" >Adicionar música</button>
                 </AddMusicaForm>
                 {tracks}
-                <button onClick={() => this.props.mudarPagina("playlists")}>Voltar para Playlists</button>
+                <button onClick={() => this.props.mudarPagina("playlists", "")} >Voltar para playlists</button>
             </DetalheDaPlaylistContainer>
         )
     };
-
 };
 
 export default DetalheDaPlaylist
