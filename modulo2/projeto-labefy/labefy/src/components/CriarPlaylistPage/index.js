@@ -4,10 +4,16 @@ import axios from "axios"
 import { baseUrl, axiosConfig } from "../../constants";
 
 const CriarPlaylistContainer = styled.div`
-    height: 500px;
+    height: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #cacaca;
+
+    button{
+        background-color:#18ac4d;
+        color: white;
+    }
 `
 
 const CriarPlaylistform = styled.form`   
@@ -44,7 +50,7 @@ class CriarPlaylistPage extends React.Component {
     render () {
         return (
             <CriarPlaylistContainer>
-                <h1>Cadastrar nova Playlist</h1>
+                <h2>Cadastrar nova Playlist</h2>
                 <CriarPlaylistform onSubmit={this.createPlaylist} >
                     <label>Nova playlist</label>
                     <input 

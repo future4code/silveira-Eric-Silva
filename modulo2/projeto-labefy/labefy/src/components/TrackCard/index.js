@@ -12,6 +12,7 @@ const TrackCardContainer = styled.div`
         align-items: center;
 
     }
+
 `
 const TrackContainer = styled.h4`
     margin: 10px;
@@ -30,7 +31,9 @@ const TrackCard = (props) => {
             <div>
             <TrackContainer>{props.trackName} - </TrackContainer>
             <ArtistContainer>{props.artist}</ArtistContainer>
-            <DeleteContainer>X</DeleteContainer>
+            <DeleteContainer
+                onClick={() => props.removeTrackFromPlaylist(props.trackId)}
+            >X</DeleteContainer>
             </div>
             <audio controls="controls">
                 <source src={props.url} type="audio/ogg"/>
