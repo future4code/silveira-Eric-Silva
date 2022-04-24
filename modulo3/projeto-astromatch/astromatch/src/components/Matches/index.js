@@ -2,52 +2,68 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import Logo from '../../img/Logo.png'
+import Button from '@material-ui/core/Button'
+import Delete from '@material-ui/icons/Delete'
+import KeyboardReturn  from '@material-ui/icons/KeyboardReturn'
+
 
 
 const ContainerMaster = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
+background-color:#ffffff;
 `
 
 const ContainerMatches = styled.div`
-border: 2px solid #e84670;
+background-color: #202022;
+width: 41vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+border: 2px solid #ed639d;
 border-radius: 12px;
+box-shadow: 0 12px 16px 0 rgba(0,0,0,0.50), 0 17px 50px 0 rgba(0,0,0,0.60);
 `
 
 const MapResult = styled.div`
-img{
-  width: 10vw;
-}
-background-color:#202022;
 display: flex;
-flex-direction: row;
-border: 2px solid #e84670;
+flex-direction: column;
+justify-content: center;
 align-items: center;
-justify-content: flex-start;
-p{
-  color: #cacaca;
+text-align: center;
+img{
+  max-height: 50vh;
+  width: 35vh; 
+  border-radius: 10px;
+  border: 2px solid #ed639d;
+ 
 }
+p{
+  width: 20vw;
+  color: #ffffff;
+}
+
 `
-
-
 
 const Header = styled.div`
 display: flex;
-justify-content: space-around;
+flex-direction: row;
+justify-content: space-evenly;
 align-items: center;
-background-color: #202022;
-border-radius: 10px;
 img{
+
   width: 35px;
+  display: flex;
 }
 h2{
-  color:#CACACA;
+  color: #ffffff;
 }
 `
-
-
-const Lista = styled.div`
+const Botoes = styled.div`
+display: flex;
+flex-direction:row;
+justify-content: space-around;
 `
 
 
@@ -96,14 +112,18 @@ export default function Matches(props) {
 
         <ContainerMatches>
           <Header>
-            <img src={Logo}/>
+            <img src={Logo} alt="Logo"/>
             <h2>AstroMatch</h2>
-            <button onClick={props.irParaHome}>Voltar</button>
           </Header>
-          <Lista>
+
             {matchList}
-          </Lista>
-            <button onClick={clearMatches}>Limpar</button>
+         
+          <Botoes>
+            <Button  color='primary' onClick={props.irParaHome}><KeyboardReturn fontSize="large"/></Button>
+            <Button  color='primary' onClick={clearMatches}><Delete fontSize="large"/></Button>
+          </Botoes>
+            
+          
 
         </ContainerMatches>
 

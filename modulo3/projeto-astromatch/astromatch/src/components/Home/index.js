@@ -1,41 +1,50 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import Logo from '../../img/Logo.png'
-import styled from 'styled-components'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Logo from '../../img/Logo.png';
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+import Arrow  from '@material-ui/icons/ArrowForwardIos';
+import Favorite from '@material-ui/icons/Favorite';
+import Close from '@material-ui/icons/Close';
+
+
 
 const ContainerMaster = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-height: 98vh;
-background-color:#CACACA; 
+height: 100vh;
+background-color:#ffffff;
 `
 
 const ContainerHome = styled.div`
 background-color: #202022;
-width: 40vw;
+width: 41vh;
 display: flex;
 flex-direction: column;
 justify-content: center;
-border: 2px solid #e84670;
+border: 2px solid #ed639d;
 border-radius: 12px;
 box-shadow: 0 12px 16px 0 rgba(0,0,0,0.50), 0 17px 50px 0 rgba(0,0,0,0.60);
 `
 const Header = styled.div`
 display: flex;
+flex-direction: row;
 justify-content: space-around;
 align-items: center;
 
+
 img{
+
   width: 35px;
+  display: flex;
 }
-h2{
-  color: #CACACA;
+h3{
+  color: #ffffff;
 }
-button{
-  background-color: #CACACA;
-  border-radius: 10px;
-  border: 2px solid #e84670;
+Button{
+  align-items: center;
+  text-align: center;
 }
 `
 
@@ -44,23 +53,23 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+text-align: center;
 img{
   max-height: 50vh;
-  width: 40vw;
-  border: 2px solid #e84670;
+  width: 40vh; 
+  border-radius: 10px;
+  border: 2px solid #ed639d;
+ 
 }
 p{
-  width: 20vw;
-  text-align: center;
-  color: #CACACA;
+
+  color: #ffffff;
 }
 `
 const Botoes = styled.div`
 display: flex;
 justify-content: space-around;
-border: 2px solid #e84670;
-border-radius: 10px;
-background-color: #202022;
+
 `
 
 const urlProfileToChoose = "https://us-central1-missao-newton.cloudfunctions.net/astroMatch/eric-silva-silveira/person"
@@ -101,11 +110,9 @@ export default function Home(props) {
       <ContainerHome>
 
         <Header>
-
           <img src={Logo} alt='logo-tinder'/>
-          <h2>AstroMatch</h2>
-          <button onClick={props.irParaMatches}>Matches</button>
-
+          <h3>AstroMatch</h3>
+          <Button variant="outlined" size='small' color="primary"  endIcon={<Arrow/>} onClick={props.irParaMatches}>Matches</Button>
         </Header>
 
         <Perfil>
@@ -113,11 +120,11 @@ export default function Home(props) {
           <p> {profile.name}, {profile.age} </p>
           <p>{profile.bio}</p>
         </Perfil>
-
         <Botoes>
-          <button onClick={() => choosePerson(false)}>❌</button>
-          <button onClick={() => choosePerson(true)}>✔</button>
+          <Button color="primary" aria-label='like'  onClick={() => choosePerson(true)}><Favorite fontSize="large"/></Button>
+          <Button  color="primary" aria-label='no like' onClick={() => choosePerson(false)}><Close fontSize="large"/></Button>
         </Botoes>
+        
 
       </ContainerHome>
 

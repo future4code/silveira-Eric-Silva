@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import Home from "./components/Home";
 import Matches from "./components/Matches"
-import { createGlobalStyle } from 'styled-components'
+import { ThemeProvider } from '@material-ui/core/styles';
+import {theme} from "./theme"
+// import { createGlobalStyle } from 'styled-components'
 
 
-const GlobalStyle = createGlobalStyle`
-margin: 0 auto;
-padding: 0 auto;
-box-sizing: border-box;
-`
+// const GlobalStyle = createGlobalStyle`
+// *{margin: 0 auto;
+// padding: 0 auto;
+// box-sizing: border-box;
+// }
+// `
 
 
 export default function App() {
@@ -35,8 +38,10 @@ export default function App() {
   
   return(
     <div>
-        <GlobalStyle/>
+        <ThemeProvider theme={theme}>
+        {/* <GlobalStyle/> */}
         {mudarPagina()}
+        </ThemeProvider>
     </div>
   );
 };
