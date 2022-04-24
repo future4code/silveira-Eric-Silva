@@ -73,11 +73,11 @@ const urlClear = 'https://us-central1-missao-newton.cloudfunctions.net/astroMatc
 // Limpa todos os matches e perfis vistos.
 export default function Matches(props) {
 
-  const [matches, setMatches] = useState([])
+  const [matches, setMatches] = useState([]);
 
   useEffect(()=>{
     getMatches()
-  }, [])
+  }, []);
 
   const getMatches = () =>{
     axios.get(urlGetMatches).then((res)=>{
