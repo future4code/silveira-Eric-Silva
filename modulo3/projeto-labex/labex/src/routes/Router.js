@@ -4,7 +4,7 @@ import ApplicationFormPage from "../Pages/ApplicationFormPage";
 import LoginPage from "../Pages/LoginPage";
 import AdminHomePage from "../Pages/AdminHomePage";
 import TripDetailsPage from "../Pages/TripDetailsPage";
-import CreateTripPage from "../Pages/TripDetailsPage";
+import CreateTripPage from "../Pages/CreateTripPage";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 export const Router = () =>{

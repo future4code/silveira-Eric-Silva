@@ -1,8 +1,11 @@
-// Para o administrador ver o detalhe de uma viagem específica, bem como os candidatos que aplicaram para ela
+// Formulário para o administrador criar uma nova viagem
 import React from 'react'
+
 
 export default function TripDetailsPage() {
   return (
-    <div>TripDetailsPage</div>
+    <div>
+      <h1>TripDetailsPage</h1>
+    </div>
   )
 }
