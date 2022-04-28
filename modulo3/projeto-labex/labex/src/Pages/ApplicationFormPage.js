@@ -8,7 +8,7 @@ export default function ApplicationFormPage() {
 
   return (
     <div>
-      <h1>ApplicationFormPage</h1>
+      <h1>Inscreva-se para uma Viagem</h1>
       <button onClick={()=>goBack(navigate)}>Voltar</button>
     </div>
   )

@@ -6,15 +6,9 @@ import {goToApplicationFormPage, goBack} from '../routes/coordinator'
 export default function ListTripsPage() {
   const navigate = useNavigate()
 
-  // const goToApplicationFormPage = () =>{
-  //   navigate("/trips/application") 
-  // }
-  // const goBack = () =>{
-  //   navigate(-1)
-  // }
   return (
     <div>
-      <h1>ListTripsPage</h1>
+      <h1>LISTA DE VIAGENS</h1>
       <button onClick={()=>goToApplicationFormPage(navigate)}>Inscreva-se</button>
       <button onClick={()=>goBack(navigate)}>Voltar</button>
     </div>

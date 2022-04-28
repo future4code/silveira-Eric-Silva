@@ -11,7 +11,7 @@
     navigate("/admin/trips/list")
   }
   export const goToCreateTripPage = (navigate) =>{
-    navigate("/admin/trips/:id")  
+    navigate("/admin/trips/create")  
   }
   export const goBack = (navigate) =>{
     navigate(-1)
