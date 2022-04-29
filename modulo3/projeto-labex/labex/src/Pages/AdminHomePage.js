@@ -1,39 +1,58 @@
 // Para o administrador ver a lista de viagens e poder deletá-las ou acessar o detalhe de cada uma delas
-import React, {useEffect} from 'react'
+import React from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {goToCreateTripPage, goBack} from '../routes/coordinator'
+import {goToCreateTripPage, goBack, goTripDetailsPage} from '../routes/coordinator'
 import axios from 'axios'
+import useProtectedPage from '../hooks/useProtectedPage'
 
 
-const useProtectedPage = () =>{
-  const navigate = useNavigate()
-  useEffect(()=>{
-    const token = localStorage.getItem('token');
-    if (token===null) {
-      console.log('Não está logado!!!')
-      navigate('/login')
-    }
-  },[])
-}
+
 
 export default function AdminHomePage() {
   useProtectedPage()
   const navigate = useNavigate()
+
+  const goTripDetailsPage = (id) =>{
+    navigate(`/admin/trips/${id}`)
+  }
+
+  const [trips, setTrips]= useState([])
   
   useEffect(()=>{
     const token = localStorage.getItem('token')
-    axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/eric-silva-silveira/trip/:id', {
+    axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/eric-silva-silveira/trips')
+    .then((res)=>{
+      setTrips(res.data.trips)
+    })
+    .catch((err)=>{
+      alert("Ocorreu um erro, tente novamente")
+    })
+  },[])
+
+  const deleteViagem=(id) =>{
+    const token = localStorage.getItem("token")
+    axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/eric-silva-silveira/trips/${id}`,
+    {
+  
       headers: {
         auth: token
       }
     })
     .then((res) => {
-      console.log(res.data)
+      alert("Viagem excluída com sucesso!")
     }).catch((err) => {
-      console.log('Deu erro: ', err.res)
+      alert("Ocorreu um erro, tente novamente")
     })
-  }, [])
-
+  }
+  const tripsList = trips.map((list)=>{
+    return(
+      <div>
+        <button onClick={()=>goTripDetailsPage(list.id)}>{list.name}</button>
+        <button onClick={()=>deleteViagem(list.id)}>X</button>
+      </div>
+    )
+  })
 
   return (
     <div>
@@ -41,6 +60,7 @@ export default function AdminHomePage() {
       <button onClick={()=>goToCreateTripPage(navigate)}>Criar Viagem</button>
       <button onClick={()=>goBack(navigate)}>Voltar</button>
       <button>Logout</button>
+        {tripsList}
     </div>
   )
 }

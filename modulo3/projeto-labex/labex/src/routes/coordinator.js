@@ -1,3 +1,6 @@
+  import { useNavigate } from "react-router-dom"
+  const navigate = useNavigate
+
   export const goToListTripPage = (navigate) => {
     navigate("/trips/list")
   }
@@ -16,3 +19,4 @@
   export const goBack = (navigate) =>{
     navigate(-1)
   }
+

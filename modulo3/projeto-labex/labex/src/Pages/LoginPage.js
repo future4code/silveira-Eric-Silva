@@ -2,8 +2,9 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {goBack, goToCreateTripPage} from '../routes/coordinator'
-// goToCreateTripPage
+import {goBack} from '../routes/coordinator'
+import useForm from '../hooks/useForm';
+
 export default function LoginPage() {
   const navigate = useNavigate() 
  
@@ -44,6 +45,7 @@ export default function LoginPage() {
       type='email'
       value={email}
       onChange={onChangeEmail}
+      required
       />
       <input
       placeholder='password'

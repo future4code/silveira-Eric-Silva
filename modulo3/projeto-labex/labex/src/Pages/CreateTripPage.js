@@ -1,23 +1,22 @@
 // Para o administrador ver o detalhe de uma viagem específica, bem como os candidatos que aplicaram para ela
 //Criar Viagem
-import React, {useEffect} from 'react'
+import React, { useState } from 'react'
 import { useNavigate} from 'react-router-dom'
 import {goBack} from '../routes/coordinator'
+import useProtectedPage from '../hooks/useProtectedPage'
 
 
-const useProtectedPage = () =>{
-  const navigate = useNavigate()
-  useEffect(()=>{
-    const token = localStorage.getItem('token');
-    if (token===null) {
-      console.log('Não está logado!!!')
-      navigate('/login')
-    }
-  },[])
-}
 export default function CreateTripPage() {
   useProtectedPage()
   const navigate = useNavigate()
+
+  const [name, setName] = useState("")
+  const [planet, setPlanet] = useState("")
+  const [date, setDate] = useState("")
+  const [description, setDescription] = useState("")
+  const [durationInDays, setDurationInDays] = useState("")
+
+  const token = localStorage 
 
   
   return (
