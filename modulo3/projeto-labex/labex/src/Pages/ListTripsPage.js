@@ -24,7 +24,7 @@ export default function ListTripsPage() {
 
   const listTrips = trips.map((list) => {
     return(
-      <div key={trips.id}>
+      <div key={list.id}>
         <p>Nome: {list.name}</p>
         <p>Descrição: {list.description}</p>
         <p>Planeta: {list.planet}</p>

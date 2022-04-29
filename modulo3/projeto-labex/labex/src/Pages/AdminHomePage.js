@@ -47,7 +47,7 @@ export default function AdminHomePage() {
   }
   const tripsList = trips.map((list)=>{
     return(
-      <div>
+      <div key={list.id}>
         <button onClick={()=>goTripDetailsPage(list.id)}>{list.name}</button>
         <button onClick={()=>deleteViagem(list.id)}>X</button>
       </div>

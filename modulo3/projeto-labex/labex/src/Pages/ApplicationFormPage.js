@@ -21,7 +21,7 @@ export default function ApplicationFormPage() {
 
   const cadastrar = (event) => {
     event.preventDefault()
-    applyToTrip()
+    applyToTrip(form.idViagem)
     cleanFields()
   };
 
@@ -29,23 +29,25 @@ export default function ApplicationFormPage() {
 
   const applyToTrip = (id) => {
     const body = {
-      "name": form.name,
-      "age": form.age,
-      "applicationText": form.applicationText,
-      "profession": form.profession,
-      "country": form.country
+      name: form.name,
+      age: form.age,
+      applicationText: form.applicationText,
+      profession: form.profession,
+      country: form.country
     }
     axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/eric-silva-silveira/trips/${id}/apply`, body)
       .then((res) => {
+        console.log(res.data)
         alert("Parabéns! Seu cadastro foi realizado com sucesso")
       }).catch((err) => {
+        console.log(err.res.data)
         alert("Opa, ocorreu um erro!")
       })
   }
 
   useEffect(() => {
     const token = localStorage.getItem("token")
-    axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/:aluno/trips')
+    axios.get('https://us-central1-labenu-apis.cloudfunctions.net/labeX/eric-silva-silveira/trips')
       .then((res) => {
         setTrips(res.data.trips)
       })
@@ -68,6 +70,7 @@ export default function ApplicationFormPage() {
 
   return (
     <div>
+      {form.idViagem}
       <h1>Inscreva-se para uma Viagem</h1>
       <form onSubmit={cadastrar}>
         <select
