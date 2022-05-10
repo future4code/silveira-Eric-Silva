@@ -3,27 +3,34 @@ import useForm from "../../hooks/useForm";
 import { TextField } from "@material-ui/core"
 import { InputsContainer } from "../LoginPage/styled";
 import Button from "@material-ui/core/Button";
+import { singUp } from "../../services/user";
+import { useNavigate } from "react-router-dom";
 
 
-const CreateUserForm = () => {
-    const [form, onChange, clear] = useForm({ name: "", email: "", password: "" })
+
+const CreateUserForm = ({setRightButtonText}) => {
+    const navigate = useNavigate()
+    const [form, onChange, clear] = useForm({username:"", email:"", password:""})
+
+
     const onSubmitForm = (event) => {
         console.log(form)
         event.preventDefault()
+        singUp(form, clear, navigate, setRightButtonText)
     }
     return (
         <InputsContainer>
             <form onSubmit={onSubmitForm}>
                 <TextField
-                    name={"name"}
-                    value={form.name}
+                    name={"username"}
+                    value={form.username}
                     onChange={onChange}
                     label={"Nome"}
                     variant={"outlined"}
                     fullWidth
                     margin={"normal"}
                     required
-                    type={"name"}
+                    type={"username"}
                 />
                 <TextField
                     name={"email"}
@@ -48,12 +55,12 @@ const CreateUserForm = () => {
                     type={"password"}
                 />
                 <Button
-                fullWidth
-                variant={"contained"}
-                color={"primary"}
-                margin={"normal"}
-                type={"submit"}
-                >Criar conta</Button>
+                    fullWidth
+                    variant={"contained"}
+                    color={"primary"}
+                    margin={"normal"}
+                    type={"submit"}
+                >Cadastrar</Button>
             </form>
         </InputsContainer>
     )

@@ -5,13 +5,15 @@ import Button from '@material-ui/core/Button'
 import LoginForm from './LoginForm'
 import { useNavigate } from 'react-router-dom'
 import { goToCreateUserPage } from '../../routes/coordinator'
+import useUnProtectedPage from '../../hooks/useUnprotectedPage'
 
-const LoginPage = () =>{
+const LoginPage = ({setRightButtonText}) =>{
+  useUnProtectedPage()
   const navigate = useNavigate()
   return (
     <ScreenContainer>
       <LogoImagem src={logo} />
-        <LoginForm/>
+        <LoginForm setRightButtonText={setRightButtonText} />
       <SingUpButtonContainer>
         <Button
         onClick={()=>goToCreateUserPage(navigate)}
