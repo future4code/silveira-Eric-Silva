@@ -1,16 +1,37 @@
 import React from 'react'
-import Button from "@material-ui/core/Button"
 import useProtectedPage from '../../hooks/useProtectedPage'
 import { BASE_URL } from '../../constants/urls'
 import useRequestData from '../../hooks/useRequestData'
+import { PostContainer, MasterContainer } from './styled'
+import { goToPostDetailPage } from '../../routes/coordinator'
+import { useNavigate } from 'react-router-dom'
+import AddPostForm from './AddPostForm'
+
 
 const PostListPage= () =>{
   useProtectedPage()
-  const posts = useRequestData([],`${BASE_URL}`)
+  const navigate = useNavigate()
+  const posts = useRequestData([],`${BASE_URL}/posts`)
+  console.log(posts)
+
+  const onClickCard= (id) =>{
+    goToPostDetailPage(navigate, id)
+  }
+
+  const postCards = posts.map((post)=>{
+    return (
+      <PostContainer key={post.id} onClick={()=>onClickCard(post.id)} >
+      <p>Enviado por:{post.username}</p>
+      <p>Titulo:{post.title}</p>
+      <p>Post:{post.body}</p>
+      </PostContainer>
+    )
+  })
   return (
-    <div>
-      <h1>PostListPage</h1>
-    </div>
+    <MasterContainer>
+      <AddPostForm/>
+      {postCards}
+    </MasterContainer>
   )
 }
 

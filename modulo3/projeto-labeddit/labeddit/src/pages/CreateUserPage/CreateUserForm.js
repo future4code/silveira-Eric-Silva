@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreateUserForm = ({setRightButtonText}) => {
     const navigate = useNavigate()
-    const [form, onChange, clear] = useForm({username:"", email:"", password:""})
+    const {form, onChange, clear} = useForm({username:"", email:"", password:""})
 
 
     const onSubmitForm = (event) => {

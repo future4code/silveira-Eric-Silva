@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 const navigate = useNavigate
 
 export const goToLoginPage = (navigate) =>{
-    navigate("/login")
+    navigate("/")
 }
 
 export const goToCreateUserPage = (navigate) =>{
@@ -10,7 +10,7 @@ export const goToCreateUserPage = (navigate) =>{
 }
 
 export const goToPostListPage = (navigate) =>{
-    navigate("/")
+    navigate("/feed")
 }
 
 export const goToAddPostPage = (navigate)=>{
