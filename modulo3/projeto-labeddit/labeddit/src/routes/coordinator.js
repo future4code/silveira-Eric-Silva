@@ -9,7 +9,7 @@ export const goToCreateUserPage = (navigate) =>{
     navigate("/cadastro")
 }
 
-export const goToPostListPage = (navigate) =>{
+export const goToFeedPage = (navigate) =>{
     navigate("/feed")
 }
 

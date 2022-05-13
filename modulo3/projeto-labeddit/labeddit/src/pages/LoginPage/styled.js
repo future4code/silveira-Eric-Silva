@@ -9,7 +9,7 @@ margin-top: 10vh;
 `
 export const LogoImagem = styled.img`
   width: 70vw;
-  max-width: 250px;
+  max-width: 100px;
 `
 
 export const SingUpButtonContainer = styled.div`

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import { StyledToolbar } from './styled';
-import { goToLoginPage, goToPostListPage } from '../../routes/coordinator';
+import { goToLoginPage, goToFeedPage } from '../../routes/coordinator';
 import { useNavigate } from 'react-router-dom'
 
 
@@ -28,7 +28,7 @@ const Header = ({rightButtonText, setRightButtonText}) => {
     return (
         <AppBar position="static">
             <StyledToolbar>
-                <Button onClick={() => goToPostListPage(navigate)} color="inherit">Labeddit</Button>
+                <Button onClick={() => goToFeedPage(navigate)} color="inherit">Labeddit</Button>
                 <Button onClick={rightButtonAction} color="inherit">{rightButtonText}</Button>
             </StyledToolbar>
         </AppBar>
