@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 const navigate = useNavigate
 
-export const goToLoginPage = (navigate) =>{
+export const  goToLoginPage = (navigate) =>{
     navigate("/")
 }
 

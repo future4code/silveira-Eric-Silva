@@ -13,7 +13,7 @@ const useRequestData = (initialData, url) => {
             setData(res.data)
         }).catch((err) => {
             alert("Ocorreu um erro,tente novamente")
-            console.log(err.response.data)
+            console.log(err.response)
         })
     }, [url])
     return (data)

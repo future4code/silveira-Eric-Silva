@@ -13,7 +13,6 @@ const FeedPage = () =>{
   useProtectedPage()
   const navigate = useNavigate()
   const posts = useRequestData([],`${BASE_URL}/posts`)
-  console.log(posts)
 
   const onClickCard= (id) =>{
     goToPostDetailPage(navigate, id)
