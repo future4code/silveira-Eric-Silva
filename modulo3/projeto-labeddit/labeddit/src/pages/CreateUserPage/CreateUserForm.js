@@ -1,7 +1,7 @@
 import React from "react";
 import useForm from "../../hooks/useForm";
 import { TextField } from "@material-ui/core"
-import { InputsContainer } from "../LoginPage/styled";
+import { InputsContainer } from "../CreateUserPage/styled";
 import Button from "@material-ui/core/Button";
 import { singUp } from "../../services/user";
 import { useNavigate } from "react-router-dom";
