@@ -1,17 +1,18 @@
-function checaRenovacaoRG():any {
-    const anoAtual:any =  process.argv[2]
-    const anoNascimento:any = process.argv[3]
-    const anoEmissao:any = process.argv[4]
+function checaRenovacaoRG(
+    anoAtual:number,
+    anoNascimento:number,
+    anoEmissao:number
+    ):boolean {
  
-    const idade:any = anoAtual - anoNascimento
-    const tempoCarteira:any = anoAtual - anoEmissao
+    const idade:number = anoAtual - anoNascimento
+    const tempoCarteira:number = anoAtual - anoEmissao
  
-    const cond1 = idade <= 20 && tempoCarteira >= 5
-    const cond2 = idade > 20 && idade <= 50 && tempoCarteira >= 10
-    const cond3 = idade > 50 && tempoCarteira >= 15
+    const cond1:boolean = idade <= 20 && tempoCarteira >= 5
+    const cond2:boolean = idade > 20 && idade <= 50 && tempoCarteira >= 10
+    const cond3:boolean = idade > 50 && tempoCarteira >= 15
  
     return (cond1 || cond2 || cond3)
  }
 
- console.log(checaRenovacaoRG())
+ console.log(checaRenovacaoRG(2022, 2002, 2011))
  
