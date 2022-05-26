@@ -1,0 +1,19 @@
+{
+  "name": "aprofundamento-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "index": "tsc && node ./build/index.js",
+    "index2": "tsc && node ./build/index2.js",
+    "index3": "tsc && node ./build/index3.js",
+    "index4": "tsc && node ./build/index4.js",
+    "index5": "tsc && node ./build/index5.js"
+  },
+  "keywords": [],
+  "author": "Eric Felipe",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.7.2"
+  }
+}
