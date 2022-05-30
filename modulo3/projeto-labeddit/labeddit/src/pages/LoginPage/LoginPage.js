@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScreenContainer, LogoImagem, SingUpButtonContainer } from "./styled"
+import { ScreenContainer, LogoImagem, SingUpButtonContainer, Linha } from "./styled"
 import logo from "../../assets/Logo.png"
 import Button from '@material-ui/core/Button'
 import LoginForm from './LoginForm'
@@ -13,16 +13,20 @@ const LoginPage = ({setRightButtonText}) =>{
   return (
     <ScreenContainer>
       <LogoImagem src={logo} />
+      <h1 style={{margin:"0px"}}>LabEddit</h1>
+      <p style={{margin:"0px"}} >O projeto de rede social </p>
         <LoginForm setRightButtonText={setRightButtonText} />
+        <Linha>
+        </Linha>
       <SingUpButtonContainer>
-        <Button
+        <Button style={{borderRadius:"20px", fontWeight:"bold"}}
         onClick={()=>goToCreateUserPage(navigate)}
         fullWidth
-        variant={'text'}
-        color={'outlined'}
+        variant={'outlined'}
+        color={'primary'}
         margin={"normal"}
         type={"submit"}
-        >Não possui conta? Cadastre-se
+        >Crie uma conta!
         </Button>
       </SingUpButtonContainer>
     </ScreenContainer>

@@ -1,14 +1,16 @@
 import React from 'react'
-import { LogoImagem, ScreenContainer } from '../LoginPage/styled'
-import logo from "../../assets/Logo.png"
+import { useState } from 'react'
+import { ScreenContainer } from '../CreateUserPage/styled'
 import CreateUserForm from "./CreateUserForm"
 import useUnProtectedPage from '../../hooks/useUnprotectedPage'
+
+
 
 const CreateUserPage = ({setRightButtonText}) =>{
   useUnProtectedPage()
   return (
     <ScreenContainer>
-      <LogoImagem src={logo} />
+      <h1>Olá, boas vindas ao LabEddit ;)</h1>
       <CreateUserForm setRightButtonText={setRightButtonText} />
     </ScreenContainer>
   )
