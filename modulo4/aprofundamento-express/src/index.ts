@@ -1,5 +1,6 @@
-import express, {Request, Response} from "express";
+import express, {Request, response, Response} from "express";
 import cors from "cors";
+import { request } from "http";
 
 const app = express();
 
@@ -20,7 +21,7 @@ type Tasks = {
     completed:boolean
 }
 
-const afazeres :Tasks[]=[  {
+let afazeres :Tasks[]=[  {
     "userId": 1,
     "id": 1,
     "title": "tomar café",
@@ -72,6 +73,7 @@ app.get(`/filtro-de-tarefas`, (req: Request, res: Response) => {
 
         res.status(200).send(filterCompleted)
 })
+
 app.post("/adicionar-tarefa", (req: Request, res: Response) => {
     const novaTarefa:Tasks = {
         id: Date.now(),
@@ -84,3 +86,26 @@ app.post("/adicionar-tarefa", (req: Request, res: Response) => {
         res.status(200).send(afazeres)
 })
 
+app.delete("/delete/tarefas/:id",(req:Request, res:Response)=>{
+    const id = Number (req.params.id)
+    const deleteTask =
+        afazeres.filter(
+            (afazer:Tasks)=>{
+                return afazer.id !== id
+            }
+        )
+        afazeres = deleteTask
+        res.status(200).send(deleteTask)
+})
+
+app.get(`/:userId`, (req: Request, res: Response) => {
+    const userId = Number (req.params.id)
+    const filterId =
+        afazeres.filter(
+            (afazer: Tasks) => {
+                return afazer.userId === userId
+            }
+        )
+
+        res.status(200).send(filterId)
+})
