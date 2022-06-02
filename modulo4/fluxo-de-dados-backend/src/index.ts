@@ -21,8 +21,32 @@ app.post("/adicionar-produto", (req:Request, res:Response)=>{
         name: (req.body.name),
         price: (req.body.price)
     }
+    let erroMsg = 400
+    try{
+        if(!req.body.name || !req.body.price){
+            erroMsg = 401
+            throw new Error ("Um dos parâmetros não condiz")
+        }
+        if( typeof req.body.name !== "string"){
+            erroMsg = 422
+            throw new Error ("name não condiz com o tipo")
+        }
+        if (typeof (req.body.price) !== "number"){
+            erroMsg = 422
+            throw new Error ("price não condiz com o tipo")
+        }
+        if (req.body.price <= 0){
+            erroMsg = 422
+            throw new Error("price com o valor menor ou igual a 0")
+        }
     listaDeProdutos.push(novoProduto)
     res.status(201).send(listaDeProdutos)
+} catch (error:any){
+    if (erroMsg==200)
+    res.status(500).send("Erro, tente novamente!")
+    else
+    res.status(erroMsg).send(error.message)
+}
 })
 
 app.get("/produtos", (req:Request, res:Response)=>{
@@ -31,21 +55,68 @@ app.get("/produtos", (req:Request, res:Response)=>{
 
 app.put("/produto/:id/editar", (req:Request, res:Response)=>{
     const id = (req.params.id)
-    const editarProduto = listaDeProdutos.map(produto=>produto.id === id ? 
-        {...produto,
-        name:req.body.name,
-        price: req.body.price } 
-        : produto)
-    res.status(201).send(editarProduto)
-})
+    const indexProduto = listaDeProdutos.findIndex(produto=>produto.id === id)
+    let erroMsg:number = 400
+    try{
+        if (!req.body.price){
+            erroMsg = 401
+            throw new Error('nenhum valor declarado no price')
+        }
+        if (typeof(req.body.price) !== "number" ){
+            erroMsg = 422
+            throw new Error("price não é do tipo number")
+        }
+        if (req.body.price <= 0){
+            erroMsg = 422
+            throw new Error("price com o valor menor ou igual a 0")
+        }
+        if (!id) {
+            erroMsg = 404
+            throw new Error('Id não foi recebido')
+        }
+        if (!indexProduto) {
+            erroMsg= 404
+            throw new Error('Product não encontrado')
+        }
+
+    
+
+    listaDeProdutos[indexProduto].name = req.body.name 
+    listaDeProdutos[indexProduto].price = req.body.price
+    res.status(201).send(listaDeProdutos)
+
+        } catch(error:any) {
+            if (erroMsg===200)
+                res.status(500).send("Erro, tente novamente!")
+            else
+                res.status(erroMsg).send(error.message)
+        }
+}
+
+)
 
 app.delete("/produto/delete/:id", (req:Request, res:Response)=>{
     const id = (req.params.id)
     const indexDelete = 
     listaDeProdutos.findIndex((produto:Produtos)=>{
-        return produto.id !== id
+        return produto.id === id
     }
     )
-    listaDeProdutos.splice
-    res.status(200).send(deletarProduto)
+    let erroMsg:number = 400
+    try{
+        if (!id){
+            erroMsg= 404
+            throw new Error("Id não encontrado")
+        }
+        if (!indexDelete){
+            erroMsg = 404
+            throw new Error("Produto não encontrado")
+        }
+    
+    listaDeProdutos.splice(indexDelete, 1)
+    res.status(200).send(listaDeProdutos)
+    }catch (error:any){
+        if (erroMsg === 200)
+        res.status(500).send("Erro, tente novamente!")
+    }
 })
