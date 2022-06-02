@@ -1,0 +1,19 @@
+1)
+a) Método GET
+b) users
+
+2)
+a) Usei o Params, pois acho mais adequado já que filtrei
+ todos os types de uma vez só, usaria o Query se fosse um
+    type específico.
+b) Sim, poderia definir um enum e só colocar as duas opções
+
+3)
+a) Query, pois busca um usuário em específico
+
+4)
+a) Em vez de adicionar um User novo, eu só consigo editar os
+que já estão dentro do meu array.
+b) Não. Pois não altera, apenas modifica.
+
+
