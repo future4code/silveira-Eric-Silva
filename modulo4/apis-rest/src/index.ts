@@ -31,8 +31,8 @@ app.get("/users/:type", (req:Request, res:Response)=>{
             throw new Error("User a not found.")
         }
         res.status(200).send(user)
-    }catch(error){
-        res.status(errorCode).send("Deu ruim carai")
+    }catch(error:any){
+        res.status(errorCode).send({mensagem: error.message})
     }
     
  
@@ -41,20 +41,20 @@ app.get("/users/search/:name", (req:Request, res:Response)=>{
     let errorCode:number = 400
     try{
         const name:string = (req.params.name)
-        if (name!==name){
+        if (!name){
             errorCode = 422
             throw new Error ("Invalid value for name. Please send a string")
         }
         const user = users.filter((user)=>{
             return user.name === name
         })
-        if(user!==user){
+        if(!user.length){
             errorCode = 404
             throw new Error("User a not found.")
         }
         res.status(200).send(user)
-    }catch(error){
-        res.status(errorCode).send("Deu ruim carai")
+    }catch(error:any){
+        res.status(errorCode).send({mensagem: error.message})
     }
     
  
@@ -78,7 +78,9 @@ app.post("/users", (req:Request, res:Response)=>{
         users.push(newUser)
         res.status(201).send({message:"User created successfully"})
 
-    }catch(error){
-        res.status(errorCode).send("Algo de certo está errado")
+    }catch(error:any){
+        res.status(errorCode).send({mensagem: error.message})
     }
 })
+
+app.put("users/editar:id", )

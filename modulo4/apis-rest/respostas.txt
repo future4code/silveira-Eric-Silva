@@ -17,3 +17,5 @@ que já estão dentro do meu array.
 b) Não. Pois não altera, apenas modifica.
 
 
+
+
