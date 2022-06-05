@@ -1,0 +1,24 @@
+{
+  "name": "lista-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "index": "tsc && node ./build/index.js",
+    "index2": "tsc && node ./build/index2.js",
+    "index3": "tsc && node ./build/index3.js",
+    "index4": "tsc && node ./build/index4.js",
+    "index5": "tsc && node ./build/index5.js",
+    "index6": "tsc && node ./build/index6.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.35"
+  }
+}
