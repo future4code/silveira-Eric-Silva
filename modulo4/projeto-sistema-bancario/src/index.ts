@@ -1,6 +1,7 @@
 import express, {Request, Response} from "express";
 import cors from "cors";
 import { Conta, Extrato, contas} from "./data";
+import {checkCPFFormat, checkAge} from "./verificacoes"
 
 const app = express();
 
@@ -23,13 +24,17 @@ app.post("/contas", (req:Request, res:Response)=>{
    
     try{ 
         let verificando = 2022 - Number(ano) >=18
-        if(verificando === false){
-        errorCode = 422;
-        throw new Error("Idade inválida")
+        // if(verificando === false){
+        // errorCode = 422;
+        // throw new Error("Idade inválida")
+        // }
+        if (!checkAge(req.body.dataDeNascimento)){
+            errorCode = 422
+            throw new Error("Idade insuficiente, tente de novo com 18 👍")
         }
-        const checkCPFFormat = (cpf:string) => {
-            const cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}))$/; 
-            return cpfValido.test(cpf)
+        if (!checkCPFFormat(req.body.cpf)){
+            errorCode = 422;
+            throw new Error("CPF inválido")
         }
         const { nome, cpf, dataDeNascimento, saldo, extrato} = req.body
         if (!nome || !cpf || (!dataDeNascimento )   || (!saldo && saldo !== 0) || !extrato){
