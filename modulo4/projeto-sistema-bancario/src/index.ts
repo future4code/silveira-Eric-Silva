@@ -23,14 +23,9 @@ app.post("/contas", (req:Request, res:Response)=>{
     const [dia, mes, ano] = req.body.dataDeNascimento.split("/")
    
     try{ 
-        let verificando = 2022 - Number(ano) >=18
-        // if(verificando === false){
-        // errorCode = 422;
-        // throw new Error("Idade inválida")
-        // }
         if (!checkAge(req.body.dataDeNascimento)){
             errorCode = 422
-            throw new Error("Idade insuficiente, tente de novo com 18 👍")
+            throw new Error("Idade insuficientenmvh")
         }
         if (!checkCPFFormat(req.body.cpf)){
             errorCode = 422;
