@@ -8,6 +8,7 @@ import getUserId from "./endpoints/getUserId";
 import putEditUser from "./endpoints/putEditUser";
 import postTask from "./endpoints/postTask";
 import getTaskId from "./endpoints/getTaskId";
+import getUsers from "./endpoints/getUsers";
 
 
 const app: Express = express();
@@ -23,6 +24,8 @@ app.put("/user/edit/:id", putEditUser)
 app.post("/task", postTask)
 
 app.get("/task/:id", getTaskId)
+
+app.get("/user/all", getUsers)
 
 
 
