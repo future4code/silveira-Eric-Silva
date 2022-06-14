@@ -1,7 +1,7 @@
 import axios from "axios";
 import { baseURL } from "./baseUrl";
 
-type user={
+export type user={
       id:string,
       name:string,
       email:string
