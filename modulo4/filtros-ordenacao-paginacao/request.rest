@@ -9,4 +9,9 @@ Content-Type: application/json
 ###
 GET http://localhost:3003/orderUser?order=ASC
 Content-Type: application/json
-
+###
+GET http://localhost:3003/paginationUsers?page=2
+Content-Type: application/json
+###
+GET http://localhost:3003/fullEndpoints/amanda/filterType?type=Teacher/orderUsers?order=ASC/paginationUsers?page=1
+Content-Type: application/json

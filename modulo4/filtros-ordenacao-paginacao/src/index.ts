@@ -9,6 +9,8 @@ import { getAllUsers } from "./endpoints/getAllUsers";
 import { getFilterNameUser } from "./endpoints/getFilterNameUser";
 import { getFilterTypeUser } from "./endpoints/getFilterTypeUser";
 import { getOrderUser } from "./endpoints/getOrderUser";
+import { getPaginationUsers } from "./endpoints/getPaginationUsers";
+import { getFullEndpoints } from "./endpoints/getFullEndpoints";
 
 dotenv.config();
 
@@ -34,6 +36,10 @@ app.get(`/filterUser/:name`, getFilterNameUser)
 app.get(`/filterType`, getFilterTypeUser)
 
 app.get(`/orderUser`, getOrderUser)
+
+app.get(`/paginationUsers`, getPaginationUsers)
+
+app.get(`/fullEndpoints`, getFullEndpoints)
 
 const server = app.listen(process.env.PORT || 3003, () => {
     if (server) {
