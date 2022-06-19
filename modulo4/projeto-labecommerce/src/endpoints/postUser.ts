@@ -17,6 +17,6 @@ export default async function postUsers(req:Request, res:Response):Promise<void>
     await insertUser(users)
     res.status(201).send("Usuário criado com sucesso")
    } catch (error:any) {
-    res.status(400).send("Algo inesperado ocorreu")
+    res.status(400).send(error.message || error.sqlMessage)
    }     
 }

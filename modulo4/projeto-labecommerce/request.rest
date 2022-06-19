@@ -11,3 +11,14 @@ Content-Type: application/json
 
 GET http://localhost:3003/users
 Content-Type: application/json
+
+###
+
+POST http://localhost:3003/products
+Content-Type: application/json
+
+{
+    "name": "Notebook",
+    "price": 4000,
+    "image_url":"https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ"
+}
