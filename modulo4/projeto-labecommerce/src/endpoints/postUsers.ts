@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import insertUser from "../data/insertUser";
+import insertUsers from "../data/insertUsers";
 import { Users } from "../type";
 
 export default async function postUsers(req:Request, res:Response):Promise<void> {
@@ -14,7 +14,7 @@ export default async function postUsers(req:Request, res:Response):Promise<void>
         throw new Error ("Usuário inválido")
     }
     
-    await insertUser(users)
+    await insertUsers(users)
     res.status(201).send("Usuário criado com sucesso")
    } catch (error:any) {
     res.status(400).send(error.message || error.sqlMessage)

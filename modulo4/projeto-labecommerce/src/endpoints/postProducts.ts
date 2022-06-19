@@ -1,20 +1,20 @@
 import { Request, Response } from "express";
-import insertProduct from "../data/insertProduct";
-import { Product } from "../type";
+import insertProducts from "../data/insertProducts";
+import { Products } from "../type";
 
-export default async function postProduct(req:Request, res:Response):Promise<void> {
+export default async function postProducts(req:Request, res:Response):Promise<void> {
    try {
-    const product: Product={
+    const products: Products={
         id: Date.now() + Math.random().toString(),
         name: req.body.name,
         price: req.body.price,
         image_url: req.body.image_url
     }
-    if(!product){
+    if(!products){
         throw new Error ("Produto inválido")
     }
     
-    await insertProduct(product)
+    await insertProducts(products)
     res.status(201).send("Produto criado com sucesso")
    } catch (error:any) {
     res.status(400).send(error.message || error.sqlMessage)
