@@ -7,6 +7,7 @@ import { Commerce } from "./Classes/Commerce";
 import { Residence } from "./Classes/Residence";
 import { ResidentialClient } from "./Classes/ResidentialClient";
 import { CommercialClient } from "./Classes/CommercialClient";
+import { IndustrialClient } from "./Classes/IndustrialClient";
 
 
 // 1)
@@ -111,3 +112,8 @@ console.log(
 // a)As duas são filhas de Residence e fazem a implementação da interface Client
 // b) Como se trata de um residential client e de um comercial client, um tem cpf como propriedade e o outro tem cnpj. tirando isso, os valores multiplicado são diferentes também.
 
+
+const industrialClient = new IndustrialClient("Eric Felipe", 4, 888, 8, 10, "47220000")
+console.log(
+    industrialClient.calculateBill()
+)
