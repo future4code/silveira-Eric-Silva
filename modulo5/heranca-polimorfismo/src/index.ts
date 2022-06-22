@@ -3,6 +3,10 @@ import {Customer} from "./Classes/Customer"
 import { Client } from "./Interface/Client";
 import { Place } from "./Classes/Place";
 import { Industry } from "./Classes/Industry";
+import { Commerce } from "./Classes/Commerce";
+import { Residence } from "./Classes/Residence";
+import { ResidentialClient } from "./Classes/ResidentialClient";
+import { CommercialClient } from "./Classes/CommercialClient";
 
 
 // 1)
@@ -58,10 +62,52 @@ console.log(
 // b)Tirando o abstract ou criando uma class filha com o extends
 
 // 3)
-// a)Tirando o abstract ou criando uma class filha com o extends
+// a)Tirando o abstract ou criando uma classe filha com o extends
 
-const industry:Industry = {
-    cep:"12246023"
+const residence = new Residence(257, "89324778")
+console.log(
+    residence.getCep(),
+    residence.getResidentsQuantity()
+)
 
-    
-}
+const commerce = new Commerce(567, "23870038")
+console.log(
+    commerce.getCep(),
+    commerce.getFloorsQuantity()
+)
+
+const industry = new Industry(897, "47220000")
+console.log(
+    industry.getCep(),
+    industry.getMachinesQuantity()
+)
+
+
+const residentialClient = new ResidentialClient("98776538700", "Eric Felipe", 1, 900, 5, "4722000")
+console.log(
+    residentialClient.getCpf(),
+    residentialClient.getCep(),
+    residentialClient.name,
+    residentialClient.registrationNumber,
+    residentialClient.consumedEnergy,
+    residentialClient.getResidentsQuantity(),
+    residentialClient.calculateBill()
+);
+
+// 4)
+// a) Só possui o método getters para visualizar as informações.
+
+const commercialClient = new CommercialClient("86327802394","Eric Felipe", 1, 900, 5, "4722000")
+console.log(
+    commercialClient.getCnpj(),
+    commercialClient.getCep(),
+    commercialClient.name,
+    commercialClient.registrationNumber,
+    commercialClient.consumedEnergy,
+    commercialClient.calculateBill()
+);
+
+// 5)
+// a)As duas são filhas de Residence e fazem a implementação da interface Client
+// b) Como se trata de um residential client e de um comercial client, um tem cpf como propriedade e o outro tem cnpj. tirando isso, os valores multiplicado são diferentes também.
+
