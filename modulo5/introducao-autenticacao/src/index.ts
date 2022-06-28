@@ -1,5 +1,8 @@
 import { app } from "./app";
-import { generateId } from "./service/generateId";
+import { UserController } from "./endpoints/UserController";
 
 
-console.log(generateId())
+const userController = new UserController()
+
+app.post('/user/signup', userController.postUser)
+app.get('/user/:email', userController.getUserByEmail)

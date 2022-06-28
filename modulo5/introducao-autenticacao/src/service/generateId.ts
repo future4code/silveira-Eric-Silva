@@ -1,6 +1,8 @@
 import { v4 } from "uuid";
 
-export function generateId(): string {
-    return v4();
+export class generateId {
+    generateId = () =>{
+        return v4();
+    }
   }
 

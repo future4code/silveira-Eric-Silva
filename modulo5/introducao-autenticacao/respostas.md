@@ -8,3 +8,6 @@
 
 ## 3)
 ### a) ela promete que a seguir vem uma string, por que quando a colocamos nosso código ainda não está pronto.
+
+## 7)
+### a) pra dizer que espera qualquer coisa aí na frente. 
