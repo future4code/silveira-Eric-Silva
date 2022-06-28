@@ -1,3 +1,4 @@
+import { UserType } from "../model/type";
 import { UserModel } from "../model/UserModel";
 import BaseDatabase from "./BaseDatabase";
 
@@ -27,14 +28,15 @@ export default class UserDataBase extends BaseDatabase{
             
         }
     }
-    public async selectById(id:string){
+    public async selectById(id:string):Promise<UserType>{
         try {
             const result = await BaseDatabase.connection("User")
             .select("*")
             .where("id", "=", id)
-            return result.map((id)=>{
-                return {...id}
-            })
+            return result [0]
+            // .map((user)=>{
+            //     return {...user}
+            // })
         } catch (error:any) {
             throw new Error ("Erro no UserDataBase select")
             

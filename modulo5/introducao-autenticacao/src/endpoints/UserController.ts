@@ -3,7 +3,7 @@ import UserDataBase from "../data/UserDataBase";
 import { Authentication } from "../model/type";
 import { UserModel } from "../model/UserModel";
 import { generateId } from "../service/generateId";
-import Authenticator from "../service/jwt";
+import Authenticator from "../service/Authenticator";
 
 export class UserController{
     async postUser(req:Request, res:Response):Promise<void>{
@@ -46,12 +46,20 @@ export class UserController{
             res.status(500).send(error.message || error.sqlMessage)
         }
     }
-//     async getUserById(req:Request, res:Response):Promise<void> {
-//         try {
-//             const token = req.headers.authorization as string
-//             const authentication = Authenticator.
-//         } catch (error) {
-            
-//         }
-//     }
-// }
+    async getUserById(req:Request, res:Response):Promise<void> {
+        try {
+            const token = req.headers.authorization as string
+            const authentication = new Authenticator()
+            const id = authentication.getTokenData(token)
+            const userDB = new UserDataBase()
+            const user = await userDB.selectById(id) 
+            if(id != user.id){
+                throw new Error("User not found")
+            }
+            res.status(200).send(user)
+
+        } catch (error:any) {
+            res.status(500).send(error.message || error.sqlMessage)
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import * as jwt from "jsonwebtoken"
 import dotenv from 'dotenv'
-import { Authentication } from "../model/type"
+import { Authentication} from "../model/type"
 
 dotenv.config()
 
@@ -10,16 +10,17 @@ export default class Authenticator {
             authentication,
             process.env.JWT_KEY as string, 
             {
-                expiresIn: "1min"
+                expiresIn: "1h"
             }
         )
     }
 
-    getTokenData = (token: string) => {
+    getTokenData = (token: string):string => {
         const tokenData = jwt.verify(
             token,  process.env.JWT_KEY as string, 
-        )
-
-        return tokenData
+        ) as any
+        return tokenData.id
     }
 }
+
+    
