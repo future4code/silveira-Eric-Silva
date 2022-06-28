@@ -35,13 +35,20 @@ export class UserController{
             res.status(500).send(error.message || error.sqlMessage)
         }
     }
-    async getUserByEmail(req:Request, res: Response):Promise<void>{
+    async getLogin(req:Request, res: Response):Promise<void>{
         try{
             const email = req.params.email
+            const password = req.params.password
             const userDB = new UserDataBase()
             const user = await userDB.select(email)
-
-            res.status(200).send(user)
+            if(user.email != email || user.password != password){
+                throw new Error("Parameter invalid")
+            }
+            const payload: Authentication  = {
+                id:user.id
+            }
+            const token = new Authenticator().generateToken(payload)
+            res.status(200).send(token)
         }catch (error:any){
             res.status(500).send(error.message || error.sqlMessage)
         }
@@ -62,4 +69,5 @@ export class UserController{
             res.status(500).send(error.message || error.sqlMessage)
         }
     }
+
 }

@@ -15,14 +15,12 @@ export default class UserDataBase extends BaseDatabase{
             throw new Error("Erro no UserDataBase insert")
         }
     }
-    public async select(email:string){
+    public async select(email:string):Promise<UserType>{
         try {
             const result = await BaseDatabase.connection("User")
             .select("*")
             .where("email", "=", email)
-            return result.map((user)=>{
-                return {...user}
-            })
+            return result [0]
         } catch (error:any) {
             throw new Error ("Erro no UserDataBase select")
             

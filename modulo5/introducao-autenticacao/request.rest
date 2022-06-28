@@ -6,12 +6,7 @@ Content-Type: application/json
    "password": "oloquinhomeu"
 }
 ###
-GET http://localhost:3003/user/login
-
-###
-GET http://localhost:3003/user/ariane@gmail.com
-Content-Type: application/json
-
+GET http://localhost:3003/user/login/luis@gmail.com/oloquinhomeu
 ###
 GET http://localhost:3003/userId
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBlNDZhYWMxLWNkZDUtNGJlMC05ZmI2LWRmZDk2ZDJmOGFhYiIsImlhdCI6MTY1NjQyNjMwMywiZXhwIjoxNjU2NDI5OTAzfQ.rxRg-hdLkn1DbKOTArg3Xs-d-KgVfjUZj60JQXhmrlE
