@@ -1,0 +1,17 @@
+POST http://localhost:3003/user
+Content-Type: application/json
+
+{
+    "name":"Irineu",
+    "email":"vocenaosabe@gmail.com",
+    "password":"enemeu",
+    "role":"ADMIN"
+}
+###
+GET http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email":"vocenaosabe@gmail.com",
+    "password":"enemeu"
+}
