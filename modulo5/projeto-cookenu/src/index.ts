@@ -7,7 +7,7 @@ import { signup } from "./endpoints/signup";
 import { userId } from "./endpoints/userId";
 
 
-
+//Visualizar receita pelo Id
 app.get("/recipe/:id", recipeId)
 // Criar receita 
 app.post("/recipe", createRecipe)
