@@ -3,6 +3,7 @@ import User from "../model/User";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
 import IdGenerator from "../services/IdGenerator";
+import { LoginDTO } from "../types/loginDTO";
 import { SignupDTO } from "../types/signupDTO";
 
 export default class UserBusiness {
@@ -32,6 +33,25 @@ export default class UserBusiness {
 
     const token = this.authenticator.generate({ id });
 
+    return token;
+  };
+  login = async (input: LoginDTO) => {
+    const { email, password } = input;
+    if (!email || !password) {
+      throw new Error("User not found");
+    }
+    const loginUser = await this.userData.findByEmail(email);
+    if (!loginUser) {
+      throw new Error("E-mail or password do not match");
+    }
+    const passwordIsCorrect = this.hashManager.compare(
+      password,
+      loginUser.password
+    );
+    if (!passwordIsCorrect) {
+      throw new Error("E-mail or password do not match");
+    }
+    const token = this.authenticator.generate({ id: loginUser.id});
     return token;
   };
 }

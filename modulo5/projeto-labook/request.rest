@@ -2,7 +2,31 @@ POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
-    "name":"Eric",
+    "name":"Adeire",
+    "email":"adeire@gmail.com",
+    "password":"adeireadeire"
+}
+###
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
     "email":"eric@gmail.com",
     "password":"senha1"
 }
+###
+
+POST http://localhost:3003/post/create
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxODk1MTFmLTgyOGQtNGFlMy04MjNiLTlhMjBkZjYzNjQ1OCIsImlhdCI6MTY1NzEzNDc3MywiZXhwIjoxNjU3MTc3OTczfQ.Kcxh0PUCCCL5DhjSO2j1Lwuo8bjeOESmGUAsU4crD7k
+Content-Type: application/json
+
+{
+    "photo":"https://images.pexels.com/photos/12568038/pexels-photo-12568038.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load",
+    "description":"Arara Vermelha",
+    "type":"normal"
+}
+
+###
+
+GET  http://localhost:3003/post/6986b712-9870-462c-9067-b267f53d0acd
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxODk1MTFmLTgyOGQtNGFlMy04MjNiLTlhMjBkZjYzNjQ1OCIsImlhdCI6MTY1NzEzNDc3MywiZXhwIjoxNjU3MTc3OTczfQ.Kcxh0PUCCCL5DhjSO2j1Lwuo8bjeOESmGUAsU4crD7k
