@@ -1,0 +1,46 @@
+POST http://localhost:3003/users
+Content-Type: application/json
+
+{
+    "name":"Irineu",
+    "email":"irineu@gmail.com",
+    "password":"vocensabeenemeu"
+}
+
+###
+
+GET http://localhost:3003/users
+Content-Type: application/json
+
+###
+
+POST http://localhost:3003/products
+Content-Type: application/json
+
+{
+    "name": "Caixa de Som",
+    "price": 400,
+    "image_url":"https://images.pexels.com/photos/6023354/pexels-photo-6023354.jpeg?auto=compress&cs=tinysrgb&w=400"
+}
+
+###
+
+GET http://localhost:3003/products
+Content-Type: application/json
+
+###
+
+POST http://localhost:3003/purchases
+Content-Type: application/json
+
+{
+    "user_id":"16556599760590.0019456211243775723",
+    "product_id":"16556684179880.28236926354154246",
+    "quantity": 1, 
+    "total_price": 3000
+}
+
+###
+GET http://localhost:3003/users/:user_id/purchases
+Content-Type: application/json
+
