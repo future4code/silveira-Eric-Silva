@@ -1,0 +1,39 @@
+POST http://localhost:3003/signup
+Content-Type: application/json
+
+{
+    "name":"Champs",
+    "email":"corsinha@gmail.com",
+    "password":"amarelo",
+    "role":"ADMIN"
+}
+###
+POST  http://localhost:3003/login
+Content-Type: application/json
+
+{
+    "email":"corsinha@gmail.com",
+    "password":"amarelo"
+}
+###
+
+GET http://localhost:3003/users/profiles
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzNTMzMWY1LWJiMGYtNDYwZC04MTVmLTU1YjFhZjI2NjEyYiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1NjYwNjUwMSwiZXhwIjoxNjU2NjQ5NzAxfQ.09iLnBqz5aewnXgsdoErglXRD9FBlZNaE6hQ0EzMsNo
+###
+
+GET http://localhost:3003/user/:id
+Authorization: 
+
+###
+POST http://localhost:3003/recipe
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzNTMzMWY1LWJiMGYtNDYwZC04MTVmLTU1YjFhZjI2NjEyYiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1NjYxMzQ3NiwiZXhwIjoxNjU2NjU2Njc2fQ.4Bs0r5erktC06iC_q6IVe-QFpsu83nKEXNeib_DhL5o
+Content-Type: application/json
+
+{
+    "title":"Feijoda",
+    "description":"Feijoada é uma designação comum dada a pratos da culinária de regiões e países lusófonos como Portugal, Brasil, Angola, Moçambique, Timor-Leste e Macau. Consiste num guisado de feijão, normalmente com carne, e quase sempre acompanhado com arroz. "
+}
+
+###
+GET http://localhost:3003/recipe/e6a69fe4-fefd-4717-9ee6-2748b5cea4b8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzNTMzMWY1LWJiMGYtNDYwZC04MTVmLTU1YjFhZjI2NjEyYiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY1NjYxMzQ3NiwiZXhwIjoxNjU2NjU2Njc2fQ.4Bs0r5erktC06iC_q6IVe-QFpsu83nKEXNeib_DhL5o
