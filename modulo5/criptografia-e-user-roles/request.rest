@@ -1,0 +1,19 @@
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{ 
+   "email": "ratinho@gmail.com",
+   "password": "rapaaaz",
+   "role":"NORMAL"
+}
+###
+POST  http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+   "email":"muhamed@gmail.com",
+   "password": "allahuakabar"
+}
+###
+GET http://localhost:3003/profile
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNiNTViMDc4LTdiNjktNGQyMS05MjBkLTVkY2Y1OWEzYTAwNSIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTY0NDg5MzgsImV4cCI6MTY1NjQ1MjUzOH0.LOyAsD36_j9v0yJB421XNGsXSLSenLc-gXzgMoOoMZ4
