@@ -3,8 +3,8 @@ import User from "../model/User";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
 import IdGenerator from "../services/IdGenerator";
-import { LoginDTO } from "../types/loginDTO";
-import { SignupDTO } from "../types/signupDTO";
+import { InputSignupDTO } from "../model/User";
+import { InputLoginDTO } from "../model/User";
 
 export default class UserBusiness {
   constructor(
@@ -13,7 +13,7 @@ export default class UserBusiness {
     private hashManager: HashManager,
     private authenticator: Authenticator
   ) {}
-  signup = async (input: SignupDTO) => {
+  signup = async (input: InputSignupDTO) => {
     const { name, email, password } = input;
     if (!name || !email || !password) {
       throw new Error("invalid fields");
@@ -35,7 +35,7 @@ export default class UserBusiness {
 
     return token;
   };
-  login = async (input: LoginDTO) => {
+  login = async (input: InputLoginDTO) => {
     const { email, password } = input;
     if (!email || !password) {
       throw new Error("User not found");

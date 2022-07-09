@@ -2,8 +2,9 @@ import PostData from "../data/PostData";
 import Post from "../model/Post";
 import { Authenticator } from "../services/Authenticator";
 import IdGenerator from "../services/IdGenerator";
-import { createPostDTO } from "../types/createPostDTO";
-import { SelectPostDTO } from "../types/selectPostDTO";
+import { InputCreatePostDTO } from "../model/Post";
+import { InputSelectPostDTO } from "../model/Post";
+import { NotFound } from "./errors/NotFound";
 
 export default class PostBusiness {
   constructor(
@@ -11,7 +12,7 @@ export default class PostBusiness {
     private idGenerator: IdGenerator,
     private authenticator: Authenticator
   ) {}
-  createPost = async (input: createPostDTO) => {
+  createPost = async (input: InputCreatePostDTO) => {
     const { photo, description, type } = input;
     if (!photo || !description || !type) {
       throw new Error("invalid fields");
@@ -30,7 +31,7 @@ export default class PostBusiness {
     );
     await this.postData.insert(post);
   };
-  selectPost = async (input: SelectPostDTO) => {
+  selectPost = async (input:InputSelectPostDTO) => {
     const tokenData = this.authenticator.getTokenData(input.token);
     const { id, token } = input;
     if (!id || !token) {
@@ -38,7 +39,7 @@ export default class PostBusiness {
     }
     const post = await this.postData.selectById(id);
     if (!post) {
-      throw new Error("Id not found");
+      throw new NotFound("Post not found");
     }
 
     const reverteDate = new Date(post.creation_date)

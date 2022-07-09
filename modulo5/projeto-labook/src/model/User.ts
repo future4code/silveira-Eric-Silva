@@ -6,3 +6,20 @@ export default class User {
     private password: string
   ) {}
 }
+
+export interface InputSignupDTO{
+  name: string;
+  email: string;
+  password: string;
+};
+export interface InputLoginDTO {
+  email: string;
+  password: string;
+};
+
+export type FindByEmailResponse = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}[];

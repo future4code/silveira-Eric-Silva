@@ -1,19 +1,18 @@
 import { Request, Response } from "express";
 import UserBusiness from "../business/UserBusiness";
-import { LoginDTO } from "../types/loginDTO";
-import { SignupDTO } from "../types/signupDTO";
+import { InputLoginDTO } from "../model/User";
+import { InputSignupDTO } from "../model/User";
 
 export default class UserController {
     constructor(
         private userBusiness:UserBusiness
     ){}
   signup = async (req: Request, res: Response) => {
-    const { name, email, password } = req.body;
 
-    const input: SignupDTO = {
-      name,
-      email,
-      password
+    const input: InputSignupDTO = {
+      name: req.body.name,
+      email:req.body.email,
+      password:req.body.password
     };
     try {
         const token = await this.userBusiness.signup(input)
@@ -26,11 +25,10 @@ export default class UserController {
     }
   };
    login = async (req:Request, res:Response) =>{
-    const {email, password} = req.body
 
-    const input: LoginDTO = {
-        email,
-        password
+    const input: InputLoginDTO = {
+        email: req.body.email,
+        password:req.body.password
     }
     try {
         const token = await this.userBusiness.login(input)
