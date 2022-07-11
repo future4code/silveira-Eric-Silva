@@ -7,7 +7,8 @@ export default class PostData extends BaseDatabase {
 
   insert = async (post: Post) => {
     try {
-      await PostData.connection(this.TABLE_NAME).insert(post);
+      await PostData.connection(this.TABLE_NAME)
+      .insert(post);
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(error.message);
