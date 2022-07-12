@@ -37,3 +37,4 @@ test("Testing balance greater than value", () => {
 	
 	expect(result).not.toBeDefined()
 })
+
