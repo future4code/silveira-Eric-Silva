@@ -1,0 +1,20 @@
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name":"Adeire",
+    "email":"adeir@gmail.com",
+    "password":"adreire",
+    "role":"NORMAL"
+}
+###
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email":"ariane@gmail.com",
+    "password":"ariri"
+}
+###
+GET http://localhost:3003/users/profile/38597c90-09f2-4687-8e61-c493af2ff047
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFiN2VkNWU2LTJhMjctNGMxMy05YzU0LWY0MjcyMmJjMDY0MyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NTc3MzcyNTcsImV4cCI6MTY1Nzc4MDQ1N30._kubDOZuyrq1ifG35i4jeQuGQmtdqBvtEPaNwaetx9U
