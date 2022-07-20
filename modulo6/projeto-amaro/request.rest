@@ -2,9 +2,12 @@ POST http://localhost:3003/product/create
 Content-Type: application/json
 
 {
-    "name": "Jaqueta Leather Special",
-    "price": 399.90,
-    "photo": "https://amarotech-res.cloudinary.com/image/fetch/c_limit,f_auto,dpr_1,w_1920,q_auto/v1/https://amaroecp-res.cloudinary.com/image/upload/v1639000198/images/jaqueta-leather-special-preto-02.jpg",
-    "description": "JAQUETA LEATHER SPECIAL confeccionada em P.U. levemente brilhoso. Modelo de jaqueta biker com adornos metalizados, zíper e detalhe nos ombros em matelassê.",
+    "name": "Macacão Casual Acinturado Creponado",
+    "price": 299.90,
+    "photo": "https://amaroecp-res.cloudinary.com/image/upload/v1650911886/images/macacao-casual-acinturado-creponado-preto-01.jpg",
+    "description": "MACACÃO CASUAL ACINTURADO CREPONADO em crepe leve, sem forro. Macacão feminino sem mangas, acinturado por amarração frontal, bolsos laterais e barra dobrada.",
     "tag": "CLOTHES"
 }
+###
+
+GET http://localhost:3003/product?tag=CLOTHES

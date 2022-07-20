@@ -1,27 +1,41 @@
 export enum TAG {
-    CLOTHES="CLOTHES",
-    SHOES="SHOES",
-    ACCESSORIES="ACCESSORIES",
-    BEAUTY="BEAUTY",
-    HOUSE="HOUSE",
-    CHILD="CHILD"
+  CLOTHES = "CLOTHES",
+  SHOES = "SHOES",
+  ACCESSORIES = "ACCESSORIES",
+  BEAUTY = "BEAUTY",
+  HOUSE = "HOUSE",
+  CHILD = "CHILD",
 }
 
-export default class Product{
-    constructor(
-        private id:string,
-        private name:string,
-        private price:number,
-        private photo:string,
-        private description:string,
-        private tag:TAG
-    ){}
+export default class Product {
+  constructor(
+    private id: string,
+    private name: string,
+    private price: number,
+    private photo: string,
+    private description: string,
+    private tag: TAG
+  ) {}
 }
 
-export interface inputCreateProductDTO{
-    name:string
-    price:number
-    photo:string
-    description:string
-    tag:TAG
+export interface inputCreateProductDTO {
+  name: string;
+  price: number;
+  photo: string;
+  description: string;
+  tag: TAG;
+}
+export interface InputSelectProductDTO {
+  id: string;
+  name: string;
+  tag: TAG;
+}
+
+export interface FindByIdNameOrTagResponse {
+  id: string;
+  name: string;
+  price: number;
+  photo: string;
+  description: string;
+  tag: TAG;
 }
