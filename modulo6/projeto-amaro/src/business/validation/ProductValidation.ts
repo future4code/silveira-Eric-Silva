@@ -1,45 +1,27 @@
-import { inputCreateProductDTO, InputSelectProductDTO, TAG } from "../../model/Product";
+
 import { CustomError } from "../errors/CustomError";
 
 export class ProductValidation {
-  createProduct(input: inputCreateProductDTO) {
+  createProduct(input:any) {
     this.name(input.name),
-    this.price(input.price),
-    this.photo(input.description),
-    this.description(input.description),
-    this.tag(input.tag)
+    this.tags(input.tags)
   }
-  selectProduct(input:InputSelectProductDTO){
-    this.idNameOrTag(input.id, input.name, input.tag)
-  }
+  // selectProduct(input:InputSelectProductDTO){
+  //   this.idNameOrTag(input.id, input.name, input.tag)
+  // }
   private name = (name: string) => {
     if (!name) {
-      throw new CustomError(422, "Nome inválido");
+      throw new CustomError(422, "Produto inválido");
     }
   };
-  private price = (price: number) => {
-    if (!price) {
-      throw new CustomError(422, "Nome inválido");
-    }
-  };
-  private photo = (photo: string) => {
-    if (!photo) {
-      throw new CustomError(422, "Nome inválido");
-    }
-  };
-  private description = (description: string) => {
-    if (!description) {
-      throw new CustomError(422, "Nome inválido");
-    }
-  };
-  private tag = (tag: TAG) => {
+  private tags = (tag: string) => {
     if (!tag) {
-      throw new CustomError(422, "Nome inválido");
+      throw new CustomError(422, "Tag inválida");
     }
   };
-  private idNameOrTag = (id:string, name:string, tag:TAG) => {
-    if(!id && !name && !tag){
-        throw new CustomError(422, "Não foi passado um termo para a busca");
-    }
-}
-}
+//   private idNameOrTag = (id:string, name:string, tag:TAG) => {
+//     if(!id && !name && !tag){
+//         throw new CustomError(422, "Não foi passado um termo para a busca");
+//     }
+// }
+};

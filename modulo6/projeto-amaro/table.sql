@@ -9,13 +9,10 @@ CREATE TABLE
 CREATE TABLE
     amaro_tags(
         id VARCHAR(255) NOT NULL PRIMARY KEY,
-        name VARCHAR (255) NOT NULL,
-        id_product VARCHAR(255),
-        FOREIGN KEY(id_product) REFERENCES `amaro_products`(id)
+        name VARCHAR (255) NOT NULL
     );
 CREATE TABLE
     amaro_products_tags(
-        id VARCHAR(255) NOT NULL PRIMARY KEY,
         id_product VARCHAR(255),
         id_tags VARCHAR(255),
         FOREIGN KEY(id_product) REFERENCES `amaro_products`(id),

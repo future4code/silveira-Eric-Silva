@@ -2,11 +2,8 @@ POST http://localhost:3003/product/create
 Content-Type: application/json
 
 {
-    "name": "Macacão Casual Acinturado Creponado",
-    "price": 299.90,
-    "photo": "https://amaroecp-res.cloudinary.com/image/upload/v1650911886/images/macacao-casual-acinturado-creponado-preto-01.jpg",
-    "description": "MACACÃO CASUAL ACINTURADO CREPONADO em crepe leve, sem forro. Macacão feminino sem mangas, acinturado por amarração frontal, bolsos laterais e barra dobrada.",
-    "tag": "CLOTHES"
+    "name": "camisa preta",
+    "tags": ["verão", "camisa", "algodão"]
 }
 ###
 
