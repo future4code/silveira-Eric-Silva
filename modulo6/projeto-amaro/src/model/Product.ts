@@ -1,23 +1,23 @@
-export default class Product {
+export class Product {
   constructor(
     private id: string,
     private name: string,
     private tags: string[]
-    )
-    {}
-    // public getId():string{
-    //   return this.id
-    // }
-    // public getName():string{
-    //   return this.name
-    // }
-    // public getTags():string[]{
-    //   return this.tags
-    // }
+  ) {}
+  public getId(): string {
+    return this.id;
+  }
+  public getName(): string {
+    return this.name;
+  }
+  public getTags(): string[] {
+    return this.tags;
+  }
 }
-
-export interface inputCreateProductDTO {
+export interface FindByIdNameOrTagResponse {
   name: string;
-  tags:string[]
 }
-
+export interface TagDB {
+  id: string;
+  name: string;
+}

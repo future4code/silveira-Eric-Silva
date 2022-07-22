@@ -2,9 +2,14 @@ POST http://localhost:3003/product/create
 Content-Type: application/json
 
 {
-    "name": "camisa preta",
-    "tags": ["verão", "camisa", "algodão"]
+    "name": "calça jeans",
+    "tags": ["jeans", "calça"]
 }
 ###
 
-GET http://localhost:3003/product?tag=CLOTHES
+GET http://localhost:3003/product
+Content-Type: application/json
+
+{
+    "tags":["verão", "camisa", "algodão", "jeans"]
+}
