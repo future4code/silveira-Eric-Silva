@@ -1,39 +1,46 @@
 import ProductData from "../data/ProductData";
-import{Product} from "../model/Product";
+import {
+  InputCreateProductDTO,
+  InputSelectProductDTO,
+  ProductDTO,
+} from "../model/Product";
 import IdGenerator from "../services/IdGenerator";
 import { CustomError } from "./errors/CustomError";
-import { ProductValidation } from "./validation/ProductValidation";
 
 export class ProductBusiness {
   constructor(
     private productData: ProductData,
-    private idGenerator: IdGenerator,
-    private productValidation: ProductValidation
+    private idGenerator: IdGenerator
   ) {}
 
-  createProduct = async (input:any) => {
+  createProduct = async (input: InputCreateProductDTO) => {
     try {
-      const {name, tags} = input;
-      this.productValidation.createProduct(input);
+      const { name, tags } = input;
+      if (!name) {
+        throw new CustomError(422, "Nome inválido");
+      }
+      if (!tags || typeof tags !== "object") {
+        throw new CustomError(422, "Tags inválidas");
+      }
+
       const id = this.idGenerator.generateId();
-      const product = new Product(id, name, tags);
-      await this.productData.insertProduct(product);
+      const newProduct: ProductDTO = { id, name, tags };
+      await this.productData.insertProduct(newProduct);
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
   };
-  selectProduct = async (input: any) => {
+  selectProduct = async (input: InputSelectProductDTO) => {
     try {
       const { id, name, tags } = input;
-      // this.productValidation.selectProduct(input);
-      return await this.productData.selectByIdNameOrTag(id, name, tags);
+      if ((!id && !name && !tags) || typeof(tags)!=="object") {
+        throw new CustomError(422, "Nenhum parâmetro para a busca foi passado")
+      }
+
+      return await this.productData.selectByIdNameOrTag({ id, name, tags });
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
   };
 }
-export default new ProductBusiness(
-  new ProductData(),
-  new IdGenerator(),
-  new ProductValidation()
-);
+export default new ProductBusiness(new ProductData(), new IdGenerator());

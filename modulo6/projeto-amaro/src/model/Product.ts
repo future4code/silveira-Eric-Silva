@@ -1,23 +1,10 @@
-export class Product {
-  constructor(
-    private id: string,
-    private name: string,
-    private tags: string[]
-  ) {}
-  public getId(): string {
-    return this.id;
-  }
-  public getName(): string {
-    return this.name;
-  }
-  public getTags(): string[] {
-    return this.tags;
-  }
-}
-export interface FindByIdNameOrTagResponse {
-  name: string;
-}
-export interface TagDB {
+export interface ProductDTO {
   id: string;
   name: string;
+  tags: string[];
 }
+export interface InputCreateProductDTO extends Omit<ProductDTO, "id"> {}
+export interface InputSelectProductDTO extends ProductDTO {}
+export interface TagDB extends Omit<ProductDTO, "tags"> {}
+export interface FindByIdNameOrTagResponse
+  extends Omit<ProductDTO, "id" | "tags"> {}

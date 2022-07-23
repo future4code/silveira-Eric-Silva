@@ -1,16 +1,16 @@
 import { CustomError } from "../business/errors/CustomError";
-import { Product, FindByIdNameOrTagResponse, TagDB } from "../model/Product";
+import { FindByIdNameOrTagResponse, ProductDTO } from "../model/Product";
 import IdGenerator from "../services/IdGenerator";
 import BaseDatabase from "./BaseDatabase";
 
 export default class ProductData extends BaseDatabase {
-  insertProduct = async (product: Product) => {
+  insertProduct = async (product: ProductDTO) => {
     try {
       await ProductData.connection("amaro_products").insert({
-        id: product.getId(),
-        name: product.getName(),
+        id: product.id,
+        name: product.name,
       });
-      const tags = product.getTags();
+      const tags = product.tags;
       for (let tag of tags) {
         const tagData = (await this.getTagByName(tag)) as any;
         if (!tagData.name) {
@@ -22,11 +22,14 @@ export default class ProductData extends BaseDatabase {
           (tagData.name = tag), (tagData.id = tagId);
         }
         await ProductData.connection("amaro_products_tags").insert({
-          id_product: product.getId(),
+          id_product: product.id,
           id_tags: tagData.id,
         });
       }
     } catch (error: any) {
+      if(error.sqlMessage.includes("Duplicate")){
+        throw new CustomError(409,"Já existe um produto cadastrado com esse nome")
+      }
       throw new CustomError(500, error.sqlMessage);
     }
   };
@@ -44,18 +47,18 @@ export default class ProductData extends BaseDatabase {
       throw new CustomError(500, error.sqlMessage);
     }
   };
-  selectByIdNameOrTag = async (id: string, name: string, tags: string[]) => {
+  selectByIdNameOrTag = async (products:ProductDTO) => {
     try {
       let result: any = [];
       let tagsResult: any = [];
-      if (id) {
+      if (products.id) {
         result = await ProductData.connection("amaro_products")
           .select("*")
-          .where("id", "=", id);
-      } else if (name) {
+          .where("id", "=", products.id);
+      } else if (products.name) {
         result = await ProductData.connection("amaro_products")
           .select("*")
-          .where("name", "=", name);
+          .where("name", "LIKE", `%${products.name}%`);
       } else {
         const ProductsByTags = async (
           tags: string[]
@@ -78,34 +81,35 @@ export default class ProductData extends BaseDatabase {
           });
           return Promise.all(array);
         };
-        tagsResult = await ProductsByTags(tags);
+        tagsResult = await ProductsByTags(products.tags);
       }
-      console.log(tagsResult);
       if (result.length === 0 && tagsResult.length === 0) {
         throw new CustomError(404, "Produto não encontrado");
       }
       let product = [];
       if (result.length !== 0) {
-        product = result.map((result:any) => {
-          return {
-            name: result.name
-          };
+        product = result.map((result: any) => {
+          return [result.name, result.id];
         });
       }
-      const repeatedProducts:any = [];
+      const repeatedProducts: any = [];
       if (tagsResult.length !== 0) {
         tagsResult.map((repeat: any) => {
           repeat.map((tag: any) => {
-            repeatedProducts.push({name:tag.name, id:tag.id});
+            repeatedProducts.push(tag.name, tag.id);
           });
         });
       }
-      product = repeatedProducts.map((element:any, index:any)=>{
-        if(repeatedProducts.indexOf(element)===index){
-          return {name:element.name, id:element.id}
-        }
-      })
-      .filter((product:any)=>product!==null)
+      if (repeatedProducts.length > 0) {
+        product = repeatedProducts
+          .map((element: any, index: any) => {
+            if (repeatedProducts.indexOf(element) === index) {
+              return element;
+            }
+          })
+          .filter((product: any) => product !== undefined);
+      }
+
       return product;
     } catch (error: any) {
       throw new CustomError(
@@ -115,4 +119,3 @@ export default class ProductData extends BaseDatabase {
     }
   };
 }
-

@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import productBusiness, { ProductBusiness } from "../business/ProductBusiness";
+import { InputCreateProductDTO, InputSelectProductDTO } from "../model/Product";
 
 
 
 export class ProductController {
   constructor(private productBusiness: ProductBusiness) {}
   createProduct = async (req: Request, res: Response) => {
-    const input = {
+    const input:InputCreateProductDTO = {
       name: req.body.name,
       tags: req.body.tags
     };
@@ -18,7 +19,7 @@ export class ProductController {
     }
   };
   selectProduct = async (req: Request, res: Response) => {
-    const input = {
+    const input:InputSelectProductDTO = {
       id: (req.query.id as string) || "",
       name: (req.query.name as string) || "",
       tags: (req.body.tags as string[]) || [],
