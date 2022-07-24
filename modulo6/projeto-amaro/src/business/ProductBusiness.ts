@@ -33,14 +33,20 @@ export class ProductBusiness {
   selectProduct = async (input: InputSelectProductDTO) => {
     try {
       const { id, name, tags } = input;
-      if ((!id && !name && !tags) || typeof(tags)!=="object") {
+      if ((!id && !name && tags.length===0) || typeof(tags)!=="object") {
         throw new CustomError(422, "Nenhum parâmetro para a busca foi passado")
       }
 
-      return await this.productData.selectByIdNameOrTag({ id, name, tags });
+      if(id || name){
+        return this.productData.selectByNameOrId(input)
+      }else{
+        return this.productData.selectByTag(input)
+      }
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
   };
 }
-export default new ProductBusiness(new ProductData(), new IdGenerator());
+export default new ProductBusiness(
+  new ProductData(),
+  new IdGenerator());

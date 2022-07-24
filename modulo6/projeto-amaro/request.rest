@@ -2,12 +2,12 @@ POST http://localhost:3003/product/create
 Content-Type: application/json
 
 {
-    "name": "bolsa preta",
-    "tags": ["couro", "acessório", "bolsa" ]
+    "name": "",
+    "tags": ["algodão", "verão", "camisa" ]
 }
 ###
 
-GET http://localhost:3003/product
+GET http://localhost:3003/product?name=
 Content-Type: application/json
 
 {
