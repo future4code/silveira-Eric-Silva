@@ -1,7 +1,10 @@
 import { Router } from "express";
-import paymentBusiness from "../PaymentBusiness";
+import paymentController from "../../controller/PaymentController";
 
 export const paymentRouter = Router()
 
-paymentRouter.post("/creditCard", paymentBusiness.paymentCardCredit)
-paymentRouter.post("/slip", paymentBusiness.paymentSlip)
+paymentRouter.post("/creditCard", paymentController.registerPaymentCreditCard)
+paymentRouter.post("/slip", paymentController.registerPaymentSlip)
+
+paymentRouter.get("/byCreditCard/:id", paymentController.selectPaymentCreditCard)
+paymentRouter.get("/bySlip/:id", paymentController.selectPaymentSlip )
