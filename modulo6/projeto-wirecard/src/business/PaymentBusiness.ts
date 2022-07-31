@@ -1,20 +1,33 @@
 import { PaymentData } from "../data/PaymentData";
 import {
-  InputPaymentCreditCardDTO,
-  InputPaymentSlipDTO,
+  InputPaymentDTO,
   PaymentCreditCardDB,
   PaymentSlipDB,
+  PAYMENT_TYPE,
 } from "../model/@types";
 import IdGenerator from "../services/IdGenerator";
 import { CustomError } from "./errors/CustomError";
+import { PaymentValidation } from "./validation/PaymentValidation";
 
 export class PaymentBusiness {
   constructor(
     private idGenerator: IdGenerator,
-    private paymentData: PaymentData
+    private paymentData: PaymentData,
+    private paymentValidation:PaymentValidation
   ) {}
-
-  paymentCardCredit = async (input: InputPaymentCreditCardDTO) => {
+  payment = async (input: InputPaymentDTO) => {
+    try {
+      this.paymentValidation.createPayment(input)
+      if (input.payment_type === PAYMENT_TYPE.CREDITCARD) {
+        return this.paymentCardCredit(input);
+      } else {
+        return this.paymentSlip(input);
+      }
+    } catch (error:any) {
+      throw new CustomError(error.statusCode, error.message)
+    }
+  };
+  paymentCardCredit = async (input: InputPaymentDTO) => {
     try {
       const {
         client_id,
@@ -28,20 +41,6 @@ export class PaymentBusiness {
         card_expiration_date,
         card_cvv,
       } = input;
-      if (!buyer_name || !buyer_email || !buyer_cpf) {
-        throw new CustomError(422, "Comprador inválido");
-      }
-      if (!payment_amount || !payment_type) {
-        throw new CustomError(422, "Dados de pagamento inválidos");
-      }
-      if (
-        !card_holder_name ||
-        !card_number ||
-        !card_expiration_date ||
-        !card_cvv
-      ) {
-        throw new CustomError(422, "Cartão de crédito inválido");
-      }
       const id = this.idGenerator.generateId();
       const payment: PaymentCreditCardDB = {
         id,
@@ -57,6 +56,36 @@ export class PaymentBusiness {
         card_cvv,
       };
       await this.paymentData.insertPaymentCard(payment);
+      return { message: "Pagamento registrado com sucesso" };
+    } catch (error: any) {
+      throw new CustomError(error.statusCode, error.message);
+    }
+  };
+
+  paymentSlip = async (input: InputPaymentDTO) => {
+    try {
+      const {
+        client_id,
+        buyer_name,
+        buyer_email,
+        buyer_cpf,
+        payment_amount,
+        payment_type,
+      } = input;
+      const id = this.idGenerator.generateId();
+      const payment: PaymentSlipDB = {
+        id,
+        client_id,
+        buyer_name,
+        buyer_email,
+        buyer_cpf,
+        payment_amount,
+        payment_type,
+        slipNumber: this.slipNumber(),
+      };
+      await this.paymentData.insertPaymentSlip(payment);
+      const codeBars = payment.slipNumber;
+      return { "Código de barras": codeBars }; //colocar _ no lugar do espaço
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
@@ -73,62 +102,21 @@ export class PaymentBusiness {
     }
     return codeBars;
   };
-  paymentSlip = async (input: InputPaymentSlipDTO) => {
+  selectPayment = async (id: string, payment_type: string) => {
     try {
-      const {
-        client_id,
-        buyer_name,
-        buyer_email,
-        buyer_cpf,
-        payment_amount,
-        payment_type,
-      } = input;
-      if (!buyer_name || !buyer_email || !buyer_cpf) {
-        throw new CustomError(422, "Comprador inválido");
+      this.paymentValidation.selectPayment({id, payment_type})
+      if (payment_type === PAYMENT_TYPE.CREDITCARD) {
+        return await this.paymentData.selectPaymentCreditCard(id);
+      } else {
+        return this.paymentData.selectPaymentSlip(id);
       }
-      if (!payment_amount || !payment_type) {
-        throw new CustomError(422, "Dados de pagamento inválidos");
-      }
-      const id = this.idGenerator.generateId();
-      const payment: PaymentSlipDB = {
-        id,
-        client_id,
-        buyer_name,
-        buyer_email,
-        buyer_cpf,
-        payment_amount,
-        payment_type,
-        slipNumber: this.slipNumber(),
-      };
-      await this.paymentData.insertPaymentSlip(payment);
-      const codeBars = payment.slipNumber;
-      return codeBars;
-    } catch (error: any) {
-      throw new CustomError(error.statusCode, error.message);
-    }
-  };
-  selectPaymentCreditCard = async (id: string) => {
-    try {
-      if (!id) {
-        throw new CustomError(422, "Id inválido");
-      }
-      const result = await this.paymentData.selectPaymentCreditCard(id);
-      return result;
-    } catch (error: any) {
-      throw new CustomError(error.statusCode, error.message);
-    }
-  };
-  selectPaymentSlip = async (id: string) => {
-    try {
-      if (!id) {
-        throw new CustomError(422, "Id inválido");
-      }
-      const result = await this.paymentData.selectPaymentSlip(id);
-      return result;
     } catch (error: any) {
       throw new CustomError(error.statusCode, error.message);
     }
   };
 }
 
-export default new PaymentBusiness(new IdGenerator(), new PaymentData());
+export default new PaymentBusiness(
+  new IdGenerator(),
+  new PaymentData(),
+  new PaymentValidation());
