@@ -31,12 +31,6 @@
       "nomeCompleto": "Eric Felipe Silva e Silva"
     },
     {
-      "id": 2,
-      "email": "ariane@gmail.com",
-      "cidadeId": 1,
-      "nomeCompleto": "Ariane Tier Mello"
-    },
-    {
       "id": 3,
       "email": "eduardo@gmail.com",
       "cidadeId": 1,
@@ -113,6 +107,12 @@
       "email": "sanotis@dev.com",
       "cidadeId": 5,
       "id": 16
+    },
+    {
+      "nomeCompleto": "Ariane Tier de Mello",
+      "email": "mello@dev.com",
+      "cidadeId": 5,
+      "id": 18
     }
   ],
   "cidades": [
@@ -123,10 +123,6 @@
     {
       "nome": "Petrolina",
       "id": 2
-    },
-    {
-      "id": 3,
-      "nome": "São Raimundo Nonato"
     },
     {
       "nome": "Salgueiro",
